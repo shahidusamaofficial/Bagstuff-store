@@ -7,7 +7,7 @@ export default function ContactPage() {
       <p className="text-sm leading-relaxed" style={{ color: COLORS.muted }}>
         WhatsApp: +92 3016337624 &nbsp;·&nbsp; Email: hello@bagstuff.pk
         <br /><br />
-        Thank you for contacting us!.
+        Thank you for contacting us!
       </p>
     </div>
   );
