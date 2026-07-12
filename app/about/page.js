@@ -49,7 +49,6 @@ Carry with confidence. Carry Bagstuff.
       </div>
 
       <p className="text-xs mt-8" style={{ color: COLORS.muted }}>
-        Update the numbers above in app/about/page.js once you have real figures to show.
       </p>
     </div>
   );
