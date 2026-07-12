@@ -42,7 +42,11 @@ export default async function HomePage() {
         <div className="grid grid-cols-2 gap-3">
           {cats.slice(0, 4).map((c) => {
             const Icon = getIcon(c.icon);
-            return <Plate key={c.id} icon={Icon} color={c.color} iconSize={34} className="h-32 rounded-2xl" />;
+            return (
+              <Link key={c.id} href={`/shop?category=${c.id}`} className="block">
+                <Plate icon={Icon} color={c.color} iconSize={34} className="h-32 rounded-2xl hover:opacity-90 transition-opacity" />
+              </Link>
+            );
           })}
         </div>
       </div>
