@@ -59,7 +59,7 @@ export default async function HomePage() {
               const Icon = getIcon(c.icon);
               return (
                 <Link key={c.id} href={`/shop?category=${c.id}`} className="block">
-                  <Plate icon={Icon} color={c.color} iconSize={34} className="h-32 rounded-2xl hover:opacity-90 transition-opacity shadow-lg" />
+                  <Plate icon={Icon} color={c.color} image={c.image_url} iconSize={34} className="h-32 rounded-2xl hover:opacity-90 transition-opacity shadow-lg" />
                 </Link>
               );
             })}
