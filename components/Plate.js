@@ -1,4 +1,20 @@
-export default function Plate({ icon: Icon, color, className = "", iconSize = 40 }) {
+export default function Plate({ icon: Icon, color, className = "", iconSize = 40, image }) {
+  if (image) {
+    return (
+      <div
+        className={`relative flex items-end overflow-hidden ${className}`}
+        style={{ backgroundColor: `${color}33` }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={image} alt="" className="absolute inset-0 h-full w-full object-cover" />
+        <div
+          className="absolute inset-0"
+          style={{ background: `linear-gradient(180deg, transparent 40%, ${color}cc 100%)` }}
+        />
+      </div>
+    );
+  }
+
   return (
     <div
       className={`relative flex items-center justify-center overflow-hidden ${className}`}
