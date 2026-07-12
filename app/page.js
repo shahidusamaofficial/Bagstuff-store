@@ -16,6 +16,7 @@ export default async function HomePage() {
 
   const cats = categories || [];
   const all = products || [];
+  const heroCats = (cats.filter((c) => c.featured).length > 0 ? cats.filter((c) => c.featured) : cats).slice(0, 4);
   const featured = all.filter((p) => p.badge === "Bestseller").slice(0, 4);
   const arrivals = all.filter((p) => p.badge === "New").concat(all.slice(0, 4)).slice(0, 4);
 
@@ -55,7 +56,7 @@ export default async function HomePage() {
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3">
-            {cats.slice(0, 4).map((c) => {
+            {heroCats.map((c) => {
               const Icon = getIcon(c.icon);
               return (
                 <Link key={c.id} href={`/shop?category=${c.id}`} className="block">
