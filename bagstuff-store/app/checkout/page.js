@@ -1,0 +1,111 @@
+"use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { COLORS, formatPKR } from "@/lib/tokens";
+import { useCart } from "@/components/CartContext";
+
+export default function CheckoutPage() {
+  const { cart, subtotal, clearCart } = useCart();
+  const router = useRouter();
+  const [form, setForm] = useState({ name: "", phone: "", address: "", city: "" });
+  const [paymentMethod, setPaymentMethod] = useState("cod");
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
+
+  const update = (field) => (e) => setForm({ ...form, [field]: e.target.value });
+
+  const placeOrder = async () => {
+    setError("");
+    if (!form.name || !form.phone || !form.address || !form.city) {
+      setError("Please fill in all delivery details.");
+      return;
+    }
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ customer: form, cart, paymentMethod }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Something went wrong");
+      clearCart();
+      router.push(`/checkout/success?order=${data.orderId}`);
+    } catch (e) {
+      setError(e.message);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  if (cart.length === 0) {
+    return <div className="max-w-2xl mx-auto px-4 py-24 text-center" style={{ color: COLORS.muted }}>Your cart is empty.</div>;
+  }
+
+  return (
+    <div className="max-w-4xl mx-auto px-4 py-10 grid md:grid-cols-[1fr_320px] gap-10">
+      <div>
+        <h1 className="font-display font-extrabold text-3xl mb-6" style={{ color: COLORS.ink }}>Checkout</h1>
+
+        <div className="flex flex-col gap-4">
+          <div>
+            <label className="text-sm font-medium block mb-1" style={{ color: COLORS.ink }}>Full name</label>
+            <input value={form.name} onChange={update("name")} className="w-full border rounded-lg px-3 py-2 text-sm outline-none" style={{ borderColor: COLORS.line }} />
+          </div>
+          <div>
+            <label className="text-sm font-medium block mb-1" style={{ color: COLORS.ink }}>Phone number</label>
+            <input value={form.phone} onChange={update("phone")} placeholder="03XXXXXXXXX" className="w-full border rounded-lg px-3 py-2 text-sm outline-none" style={{ borderColor: COLORS.line }} />
+          </div>
+          <div>
+            <label className="text-sm font-medium block mb-1" style={{ color: COLORS.ink }}>Delivery address</label>
+            <textarea value={form.address} onChange={update("address")} rows={3} className="w-full border rounded-lg px-3 py-2 text-sm outline-none" style={{ borderColor: COLORS.line }} />
+          </div>
+          <div>
+            <label className="text-sm font-medium block mb-1" style={{ color: COLORS.ink }}>City</label>
+            <input value={form.city} onChange={update("city")} className="w-full border rounded-lg px-3 py-2 text-sm outline-none" style={{ borderColor: COLORS.line }} />
+          </div>
+
+          <div className="mt-2">
+            <div className="text-sm font-medium mb-2" style={{ color: COLORS.ink }}>Payment method</div>
+            <div className="flex flex-col gap-2">
+              <label className="flex items-center gap-2 border rounded-lg px-3 py-2.5 cursor-pointer text-sm" style={{ borderColor: paymentMethod === "cod" ? COLORS.accent : COLORS.line }}>
+                <input type="radio" checked={paymentMethod === "cod"} onChange={() => setPaymentMethod("cod")} />
+                Cash on Delivery
+              </label>
+              <label className="flex items-center gap-2 border rounded-lg px-3 py-2.5 cursor-pointer text-sm" style={{ borderColor: paymentMethod === "payfast" ? COLORS.accent : COLORS.line }}>
+                <input type="radio" checked={paymentMethod === "payfast"} onChange={() => setPaymentMethod("payfast")} />
+                Card / JazzCash / EasyPaisa
+              </label>
+              {paymentMethod === "payfast" && (
+                <p className="text-xs" style={{ color: COLORS.muted }}>
+                  Online payment isn't connected yet — this order will be recorded and marked pending until you confirm payment manually. See the Phase 2 setup guide to enable automatic card/wallet payments.
+                </p>
+              )}
+            </div>
+          </div>
+
+          {error && <p className="text-sm" style={{ color: "#D64545" }}>{error}</p>}
+
+          <button onClick={placeOrder} disabled={submitting} className="mt-2 font-semibold text-sm text-white py-3 rounded-full disabled:opacity-50" style={{ backgroundColor: COLORS.accent }}>
+            {submitting ? "Placing order…" : "Place order"}
+          </button>
+        </div>
+      </div>
+
+      <div className="h-fit rounded-xl border p-4" style={{ borderColor: COLORS.line }}>
+        <h2 className="font-semibold text-sm mb-3" style={{ color: COLORS.ink }}>Order summary</h2>
+        <div className="flex flex-col gap-2 mb-3">
+          {cart.map((item, idx) => (
+            <div key={idx} className="flex justify-between text-sm">
+              <span style={{ color: COLORS.ink }}>{item.product.name} × {item.qty}</span>
+              <span className="font-mono" style={{ color: COLORS.ink }}>{formatPKR(item.product.price * item.qty)}</span>
+            </div>
+          ))}
+        </div>
+        <div className="border-t pt-3 flex justify-between font-semibold text-sm" style={{ borderColor: COLORS.line, color: COLORS.ink }}>
+          <span>Subtotal</span><span className="font-mono">{formatPKR(subtotal)}</span>
+        </div>
+      </div>
+    </div>
+  );
+}
