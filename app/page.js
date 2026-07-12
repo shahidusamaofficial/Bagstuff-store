@@ -22,32 +22,48 @@ export default async function HomePage() {
   return (
     <div>
       {/* HERO */}
-      <div className="max-w-7xl mx-auto px-4 pt-10 pb-6 grid md:grid-cols-2 gap-8 items-center">
-        <div>
-          <span className="font-mono text-xs uppercase tracking-widest px-2 py-1 rounded" style={{ color: COLORS.accent, backgroundColor: `${COLORS.accent}14` }}>
-            {cats.length} collections · {all.length}+ pieces
-          </span>
-          <h1 className="font-display font-extrabold text-5xl md:text-6xl leading-[0.95] mt-4" style={{ color: COLORS.ink }}>
-            Bags and jewellery, made for everyday and every occasion.
-          </h1>
-          <p className="text-base mt-4 max-w-md" style={{ color: COLORS.muted }}>
-            Handbags, totes, crossbody bags, and jewellery — designed to last, delivered nationwide with Cash on Delivery.
-          </p>
-          <div className="flex items-center gap-3 mt-6">
-            <Link href="/shop" className="font-semibold text-sm text-white px-6 py-3 rounded-full hover:opacity-90" style={{ backgroundColor: COLORS.accent }}>
-              Shop the collection
-            </Link>
-          </div>
-        </div>
-        <div className="grid grid-cols-2 gap-3">
-          {cats.slice(0, 4).map((c) => {
-            const Icon = getIcon(c.icon);
-            return (
-              <Link key={c.id} href={`/shop?category=${c.id}`} className="block">
-                <Plate icon={Icon} color={c.color} iconSize={34} className="h-32 rounded-2xl hover:opacity-90 transition-opacity" />
+      <div className="relative w-full overflow-hidden">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: "url(/hero-bg.jpg)",
+            backgroundSize: "cover",
+            backgroundPosition: "center 20%",
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(90deg, rgba(20,15,14,0.82) 0%, rgba(20,15,14,0.6) 45%, rgba(20,15,14,0.25) 75%, rgba(20,15,14,0.15) 100%)",
+          }}
+        />
+        <div className="relative max-w-7xl mx-auto px-4 pt-10 pb-6 grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <span className="font-mono text-xs uppercase tracking-widest px-2 py-1 rounded" style={{ color: "#fff", backgroundColor: `${COLORS.accent}55` }}>
+              {cats.length} collections · {all.length}+ pieces
+            </span>
+            <h1 className="font-display font-extrabold text-5xl md:text-6xl leading-[0.95] mt-4 text-white">
+              Bags and jewellery, made for everyday and every occasion.
+            </h1>
+            <p className="text-base mt-4 max-w-md text-white/80">
+              Handbags, totes, crossbody bags, and jewellery — designed to last, delivered nationwide with Cash on Delivery.
+            </p>
+            <div className="flex items-center gap-3 mt-6">
+              <Link href="/shop" className="font-semibold text-sm text-white px-6 py-3 rounded-full hover:opacity-90" style={{ backgroundColor: COLORS.accent }}>
+                Shop the collection
               </Link>
-            );
-          })}
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            {cats.slice(0, 4).map((c) => {
+              const Icon = getIcon(c.icon);
+              return (
+                <Link key={c.id} href={`/shop?category=${c.id}`} className="block">
+                  <Plate icon={Icon} color={c.color} iconSize={34} className="h-32 rounded-2xl hover:opacity-90 transition-opacity shadow-lg" />
+                </Link>
+              );
+            })}
+          </div>
         </div>
       </div>
 
