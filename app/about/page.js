@@ -14,16 +14,30 @@ export default function AboutPage() {
       <h1 className="font-display font-bold text-4xl mb-6" style={{ color: COLORS.ink }}>Our Story</h1>
 
       <p className="text-sm leading-relaxed mb-4" style={{ color: COLORS.muted }}>
-        Bagstuff started with a simple idea: everyday bags and jewellery shouldn't mean choosing
-        between style and durability. We curate pieces that hold up to daily use without
-        compromising on how they look — priced fairly, delivered nationwide with Cash on Delivery.
+        At Bagstuff, we believe a great bag is more than just something you carry—it's something you rely on every single day.
+          </p
+<p className="text-sm leading-relaxed mb-4" style={{ color: COLORS.muted }}>
+          Our journey began with a simple observation: finding a stylish, well-made bag at a fair price shouldn't be difficult. Too often, shoppers have to choose between expensive designer labels and low-quality alternatives that don't last. We set out to bridge that gap.
       </p>
       <p className="text-sm leading-relaxed mb-10" style={{ color: COLORS.muted }}>
-        [Replace this paragraph with your real founding story — what got you started, what makes
-        your pieces different, and who you're making them for.]
+        Every collection is carefully selected with a focus on timeless design, everyday functionality, and lasting quality. Whether you're heading to work, university, traveling, or simply going about your day, Bagstuff is designed to complement your lifestyle without compromising on style or practicality.
       </p>
-
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-8 border-y" style={{ borderColor: COLORS.line }}>
+      <p className="text-sm leading-relaxed mb-10" style={{ color: COLORS.muted }}>
+          We believe in clean aesthetics, thoughtful details, and products that remain relevant beyond passing trends. Our goal isn't to sell the most bags—it's to create a brand people trust whenever they need something they'll enjoy carrying for years to come.
+            </p>
+                  <p className="text-sm leading-relaxed mb-10" style={{ color: COLORS.muted }}>
+As a proudly Pakistani brand, we're committed to making premium fashion accessories more accessible while delivering a shopping experience that's simple, transparent, and dependable. From carefully packed orders to responsive customer support, every interaction reflects the standards we hold ourselves to.
+  </p>
+        <p className="text-sm leading-relaxed mb-10" style={{ color: COLORS.muted }}>
+This is only the beginning of our journey. As Bagstuff grows, so will our collections, our community, and our commitment to bringing you products that combine elegance, function, and exceptional value.
+  </p>
+          <p className="text-sm leading-relaxed mb-10" style={{ color: COLORS.muted }}>
+  Thank you for choosing to be part of our story.
+    </p>
+          <p className="text-sm leading-relaxed mb-10" style={{ color: COLORS.muted }}>
+    Carry with confidence. Carry Bagstuff.
+      </p>
+  <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-8 border-y" style={{ borderColor: COLORS.line }}>
         {STATS.map((s, i) => (
           <div key={i} className="text-center">
             <s.icon size={22} color={COLORS.accent} className="mx-auto mb-2" />
