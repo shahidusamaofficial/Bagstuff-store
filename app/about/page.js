@@ -37,6 +37,7 @@ Thank you for choosing to be part of our story.
 <p className="text-sm leading-relaxed mb-10" style={{ color: COLORS.muted }}>
 Carry with confidence. Carry Bagstuff.
 </p>
+  
   <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-8 border-y" style={{ borderColor: COLORS.line }}>
         {STATS.map((s, i) => (
           <div key={i} className="text-center">
