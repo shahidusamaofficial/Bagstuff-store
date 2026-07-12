@@ -15,7 +15,7 @@ export default function AboutPage() {
 
 <p className="text-sm leading-relaxed mb-4" style={{ color: COLORS.muted }}>
   At Bagstuff, we believe a great bag is more than just something you carry—it's something you rely on every single day.
-</p
+</p>
 <p className="text-sm leading-relaxed mb-4" style={{ color: COLORS.muted }}>
   Our journey began with a simple observation: finding a stylish, well-made bag at a fair price shouldn't be difficult. Too often, shoppers have to choose between expensive designer labels and low-quality alternatives that don't last. We set out to bridge that gap.
  </p>
