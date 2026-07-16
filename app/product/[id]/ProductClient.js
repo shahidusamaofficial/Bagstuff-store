@@ -19,6 +19,13 @@ export default function ProductClient({ product, related }) {
   const [tab, setTab] = useState("description");
   const [added, setAdded] = useState(false);
 
+  const variantImages = product.images || {};
+  // Gallery: one thumbnail per variant that has its own photo, falling back to the main image_url
+  const gallery = product.variants?.length
+    ? product.variants.map((v) => ({ variant: v, url: variantImages[v] || product.image_url }))
+    : [];
+  const activeImage = (variant && variantImages[variant]) || product.image_url;
+
   const tabs = {
     description: `${product.name} is made with durable materials and reinforced stitching, built to hold up to daily use.`,
     specifications: `SKU: ${product.sku}  ·  Category: ${cat?.name}  ·  Rating: ${product.rating}/5 from ${product.reviews} reviews  ·  Warranty: 6 months against manufacturing defects.`,
@@ -38,10 +45,28 @@ export default function ProductClient({ product, related }) {
 
       <div className="grid md:grid-cols-2 gap-10 mt-6">
         <div className="flex flex-col gap-3">
-          {product.image_url ? (
-            <img src={product.image_url} alt={product.name} className="h-96 w-full object-cover rounded-2xl" />
+          {activeImage ? (
+            <img src={activeImage} alt={product.name} className="h-96 w-full object-cover rounded-2xl" />
           ) : (
             <Plate icon={Icon} color={cat?.color} iconSize={64} className="h-96 rounded-2xl" />
+          )}
+          {gallery.length > 1 && (
+            <div className="flex gap-2">
+              {gallery.map((g) => (
+                <button
+                  key={g.variant}
+                  onClick={() => setVariant(g.variant)}
+                  className="h-16 w-16 rounded-lg overflow-hidden border-2 shrink-0"
+                  style={{ borderColor: variant === g.variant ? COLORS.accent : COLORS.line }}
+                >
+                  {g.url ? (
+                    <img src={g.url} alt={g.variant} className="h-full w-full object-cover" />
+                  ) : (
+                    <Plate icon={Icon} color={cat?.color} iconSize={20} className="h-full w-full" />
+                  )}
+                </button>
+              ))}
+            </div>
           )}
         </div>
 
