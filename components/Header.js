@@ -25,11 +25,13 @@ export default function Header({ categories, onOpenCart }) {
         Cash on Delivery Available Nationwide &nbsp;•&nbsp; Free shipping on orders over PKR 5,000
       </div>
       <header
-        className="sticky top-0 z-40 w-full border-b backdrop-blur-xl backdrop-saturate-150 transition-shadow"
+        className="glass-panel sticky top-0 z-40 w-full border-b transition-shadow"
         style={{
-          backgroundColor: "rgba(255,255,255,0.55)",
-          borderColor: "rgba(255,255,255,0.4)",
-          boxShadow: "0 4px 24px rgba(43,39,36,0.06)",
+          background: "linear-gradient(180deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.45) 100%)",
+          backdropFilter: "blur(24px) saturate(180%)",
+          WebkitBackdropFilter: "blur(24px) saturate(180%)",
+          borderColor: "rgba(255,255,255,0.6)",
+          boxShadow: "0 8px 32px rgba(43,39,36,0.10), inset 0 1px 0 rgba(255,255,255,0.8)",
         }}
       >
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-4">
@@ -47,8 +49,13 @@ export default function Header({ categories, onOpenCart }) {
               </button>
               {menuOpen && (
                 <div
-                  className="absolute top-full left-0 backdrop-blur-xl backdrop-saturate-150 border rounded-xl shadow-2xl p-3 grid grid-cols-2 gap-1 w-[420px]"
-                  style={{ backgroundColor: "rgba(255,255,255,0.75)", borderColor: "rgba(255,255,255,0.5)" }}
+                  className="glass-panel absolute top-full left-0 border rounded-xl shadow-2xl p-3 grid grid-cols-2 gap-1 w-[420px] overflow-hidden"
+                  style={{
+                    background: "linear-gradient(180deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.65) 100%)",
+                    backdropFilter: "blur(20px) saturate(180%)",
+                    WebkitBackdropFilter: "blur(20px) saturate(180%)",
+                    borderColor: "rgba(255,255,255,0.6)",
+                  }}
                 >
                   {categories.map((c) => {
                     const Icon = getIcon(c.icon);
