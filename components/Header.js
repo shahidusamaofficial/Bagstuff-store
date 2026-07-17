@@ -52,8 +52,8 @@ export default function Header({ categories, onOpenCart }) {
                   className="glass-panel absolute top-full left-0 border rounded-xl shadow-2xl p-3 grid grid-cols-2 gap-1 w-[420px] overflow-hidden"
                   style={{
                     background: "linear-gradient(180deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.65) 100%)",
-                    backdropFilter: "blur(20px) saturate(180%)",
-                    WebkitBackdropFilter: "blur(20px) saturate(180%)",
+                    backdropFilter: "blur(34px) saturate(180%)",
+                    WebkitBackdropFilter: "blur(34px) saturate(180%)",
                     borderColor: "rgba(255,255,255,0.6)",
                   }}
                 >
