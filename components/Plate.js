@@ -21,10 +21,11 @@ export default function Plate({ icon: Icon, color, className = "", iconSize = 40
       style={{ background: `linear-gradient(135deg, ${color}dd 0%, ${color}99 100%)` }}
     >
       <div
-        className="absolute inset-0 opacity-20"
+        className="absolute inset-0 opacity-20 animate-shimmer"
         style={{
           backgroundImage:
             "repeating-linear-gradient(45deg, rgba(255,255,255,0.4) 0px, rgba(255,255,255,0.4) 1px, transparent 1px, transparent 10px)",
+          backgroundSize: "200% 200%",
         }}
       />
       <Icon size={iconSize} color="#fff" strokeWidth={1.4} />

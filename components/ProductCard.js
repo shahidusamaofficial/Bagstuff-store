@@ -13,14 +13,14 @@ export default function ProductCard({ product }) {
   return (
     <Link
       href={`/product/${product.id}`}
-      className="text-left group flex flex-col rounded-xl overflow-hidden bg-white border transition-all hover:-translate-y-1"
+      className="text-left group flex flex-col rounded-xl overflow-hidden bg-white border transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl"
       style={{ borderColor: COLORS.line, boxShadow: "0 1px 2px rgba(27,31,35,0.04)" }}
     >
-      <div className="relative h-40 w-full">
+      <div className="relative h-40 w-full overflow-hidden">
         {product.image_url ? (
-          <img src={product.image_url} alt={product.name} className="h-full w-full object-cover" />
+          <img src={product.image_url} alt={product.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
         ) : (
-          <Plate icon={Icon} color={catColor} className="h-full w-full" />
+          <Plate icon={Icon} color={catColor} className="h-full w-full transition-transform duration-500 group-hover:scale-110" />
         )}
         <div className="absolute top-2 left-2 flex gap-1">
           {product.badge && (

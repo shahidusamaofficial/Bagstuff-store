@@ -29,7 +29,7 @@ export default function Header({ categories, onOpenCart }) {
           <button className="md:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
-          <Link href="/" className="flex items-center shrink-0">
+          <Link href="/" className="flex items-center shrink-0 transition-transform duration-300 hover:scale-105">
             <Image src="/logo.png" alt="Bagstuff" width={140} height={87} priority className="h-11 w-auto" />
           </Link>
 
@@ -54,8 +54,8 @@ export default function Header({ categories, onOpenCart }) {
                 </div>
               )}
             </div>
-            <Link href="/about" className="text-sm font-medium" style={{ color: COLORS.ink }}>About</Link>
-            <Link href="/contact" className="text-sm font-medium" style={{ color: COLORS.ink }}>Contact</Link>
+            <Link href="/about" className="nav-underline text-sm font-medium" style={{ color: COLORS.ink }}>About</Link>
+            <Link href="/contact" className="nav-underline text-sm font-medium" style={{ color: COLORS.ink }}>Contact</Link>
           </div>
 
           <div className="flex-1 flex items-center max-w-md ml-auto">
@@ -72,10 +72,10 @@ export default function Header({ categories, onOpenCart }) {
             </div>
           </div>
 
-          <button onClick={onOpenCart} className="relative shrink-0 p-2 rounded-full hover:bg-gray-50">
+          <button onClick={onOpenCart} className="relative shrink-0 p-2 rounded-full hover:bg-gray-50 transition-colors">
             <ShoppingCart size={22} color={COLORS.ink} />
             {cartCount > 0 && (
-              <span className="absolute -top-0.5 -right-0.5 min-w-[18px] px-1 rounded-full text-[10px] font-bold flex items-center justify-center text-white" style={{ backgroundColor: COLORS.accent, height: 18 }}>
+              <span key={cartCount} className="fade-in-up absolute -top-0.5 -right-0.5 min-w-[18px] px-1 rounded-full text-[10px] font-bold flex items-center justify-center text-white" style={{ backgroundColor: COLORS.accent, height: 18 }}>
                 {cartCount}
               </span>
             )}
