@@ -28,8 +28,8 @@ export default function ProductClient({ product, related }) {
 
   const tabs = {
     description: product.description || `${product.name} is made with durable materials and reinforced stitching, built to hold up to daily use.`,
-    specifications: `SKU: ${product.sku}  ·  Category: ${cat?.name}  ·  Rating: ${product.rating}/5 from ${product.reviews} reviews  ·  Warranty: 6 months against manufacturing defects.`,
-    shipping: `Ships within 1–2 business days. Delivery in 2–4 days nationwide. Cash on Delivery available on this item, along with card and wallet payments. Every order is gift-wrapped on request.`,
+    specifications: product.specifications || `SKU: ${product.sku}  ·  Category: ${cat?.name}  ·  Rating: ${product.rating}/5 from ${product.reviews} reviews  ·  Warranty: 6 months against manufacturing defects.`,
+    shipping: product.shipping_info || `Ships within 1–2 business days. Delivery in 2–4 days nationwide. Cash on Delivery available on this item, along with card and wallet payments. Every order is gift-wrapped on request.`,
     reviews: `${product.reviews} verified customers rated this product ${product.rating} out of 5 on average.`,
   };
 
