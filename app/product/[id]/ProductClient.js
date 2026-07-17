@@ -33,6 +33,32 @@ export default function ProductClient({ product, related }) {
     reviews: `${product.reviews} verified customers rated this product ${product.rating} out of 5 on average.`,
   };
 
+  // Renders text with lines starting in "-" or "•" as a bullet list; other lines as paragraphs
+  function renderFormattedText(text) {
+    const lines = String(text).split("\n").map((l) => l.trim()).filter(Boolean);
+    const blocks = [];
+    let currentList = null;
+    lines.forEach((line) => {
+      const isBullet = /^[-•]\s*/.test(line);
+      if (isBullet) {
+        if (!currentList) { currentList = []; blocks.push(currentList); }
+        currentList.push(line.replace(/^[-•]\s*/, ""));
+      } else {
+        currentList = null;
+        blocks.push(line);
+      }
+    });
+    return blocks.map((block, i) =>
+      Array.isArray(block) ? (
+        <ul key={i} className="list-disc pl-5 space-y-1 my-2">
+          {block.map((item, j) => <li key={j}>{item}</li>)}
+        </ul>
+      ) : (
+        <p key={i} className="my-2 first:mt-0">{block}</p>
+      )
+    );
+  }
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       <div className="flex items-center gap-1.5 text-sm flex-wrap" style={{ color: COLORS.muted }}>
@@ -135,7 +161,7 @@ export default function ProductClient({ product, related }) {
                 </button>
               ))}
             </div>
-            <p className="text-sm leading-relaxed" style={{ color: COLORS.muted }}>{tabs[tab]}</p>
+            <div className="text-sm leading-relaxed" style={{ color: COLORS.muted }}>{renderFormattedText(tabs[tab])}</div>
           </div>
         </div>
       </div>
