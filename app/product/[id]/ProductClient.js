@@ -71,7 +71,28 @@ export default function ProductClient({ product, related }) {
 
       <div className="grid md:grid-cols-2 gap-10 mt-6">
         <div className="flex flex-col gap-3">
-          {activeImage ? (
+          {gallery.length > 0 ? (
+            <div className="h-96 w-full rounded-2xl overflow-hidden relative">
+              <div
+                className="flex h-full"
+                style={{
+                  width: `${gallery.length * 100}%`,
+                  transform: `translateX(-${(Math.max(0, gallery.findIndex((g) => g.variant === variant)) / gallery.length) * 100}%)`,
+                  transition: "transform 0.45s cubic-bezier(0.65, 0, 0.35, 1)",
+                }}
+              >
+                {gallery.map((g) => (
+                  <div key={g.variant} className="h-full shrink-0" style={{ width: `${100 / gallery.length}%` }}>
+                    {g.url ? (
+                      <img src={g.url} alt={`${product.name} – ${g.variant}`} className="h-full w-full object-cover" />
+                    ) : (
+                      <Plate icon={Icon} color={cat?.color} iconSize={64} className="h-full w-full" />
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : activeImage ? (
             <img src={activeImage} alt={product.name} className="h-96 w-full object-cover rounded-2xl" />
           ) : (
             <Plate icon={Icon} color={cat?.color} iconSize={64} className="h-96 rounded-2xl" />
