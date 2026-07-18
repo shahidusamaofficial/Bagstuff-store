@@ -2,10 +2,10 @@ import { Package, Star, Users, Truck } from "lucide-react";
 import { COLORS } from "@/lib/tokens";
 
 const STATS = [
-  { icon: Package, value: "1,000+", label: "orders fulfilled" },
-  { icon: Star, value: "4.7/5", label: "average rating" },
+  { icon: Package, value: "420+", label: "orders fulfilled" },
+  { icon: Star, value: "4.8/5", label: "average rating" },
   { icon: Users, value: "16+", label: "styles in stock" },
-  { icon: Truck, value: "2–4 days", label: "average delivery" },
+  { icon: Truck, value: "4–5 days", label: "average delivery" },
 ];
 
 export default function AboutPage() {
@@ -44,9 +44,9 @@ Thank you for choosing to be part of our story.
         ))}
       </div>
 
-      <p className="text-xs mt-8" style={{ color: COLORS.muted }}>
-        Update the numbers above in app/about/page.js once you have real figures to show.
-      </p>
+<p className="text-xs mt-8" style={{ color: COLORS.muted }}>
+Carry with confidence. Carry Bagstuff.
+  </p>
     </div>
   );
 }
