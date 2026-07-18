@@ -94,13 +94,32 @@ export default function CheckoutPage() {
 
       <div className="h-fit rounded-xl border p-4" style={{ borderColor: COLORS.line }}>
         <h2 className="font-semibold text-sm mb-3" style={{ color: COLORS.ink }}>Order summary</h2>
-        <div className="flex flex-col gap-2 mb-3">
-          {cart.map((item, idx) => (
-            <div key={idx} className="flex justify-between text-sm">
-              <span style={{ color: COLORS.ink }}>{item.product.name} × {item.qty}</span>
-              <span className="font-mono" style={{ color: COLORS.ink }}>{formatPKR(item.product.price * item.qty)}</span>
-            </div>
-          ))}
+        <div className="flex flex-col gap-3 mb-4">
+          {cart.map((item, idx) => {
+            const itemImage = (item.variant && item.product.images?.[item.variant]) || item.product.image_url;
+            return (
+              <div
+                key={idx}
+                className="flex items-center gap-3 fade-in-up"
+                style={{ animationDelay: `${idx * 90}ms` }}
+              >
+                <div className="h-14 w-14 rounded-lg overflow-hidden shrink-0 border" style={{ borderColor: COLORS.line }}>
+                  {itemImage ? (
+                    <img src={itemImage} alt={item.product.name} className="h-full w-full object-cover" />
+                  ) : (
+                    <div className="h-full w-full" style={{ backgroundColor: COLORS.paper }} />
+                  )}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="text-sm leading-snug truncate" style={{ color: COLORS.ink }}>{item.product.name}</div>
+                  <div className="text-xs" style={{ color: COLORS.muted }}>
+                    {item.variant && `${item.variant} · `}Qty {item.qty}
+                  </div>
+                </div>
+                <span className="font-mono text-sm shrink-0" style={{ color: COLORS.ink }}>{formatPKR(item.product.price * item.qty)}</span>
+              </div>
+            );
+          })}
         </div>
         <div className="border-t pt-3 flex justify-between font-semibold text-sm" style={{ borderColor: COLORS.line, color: COLORS.ink }}>
           <span>Subtotal</span><span className="font-mono">{formatPKR(subtotal)}</span>
