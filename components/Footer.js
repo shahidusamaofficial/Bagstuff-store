@@ -25,7 +25,7 @@ export default function Footer({ categories }) {
         </div>
         <div>
           <div className="font-semibold text-sm mb-3 text-white/90">Stay updated</div>
-          <p className="text-sm text-white/60 mb-3">Get 10% off your first order.</p>
+          <p className="text-sm text-white/60 mb-3">Email us to get 10% off your first order.</p>
           <div className="flex">
             <input placeholder="Email address" className="flex-1 px-3 py-2 rounded-l-lg text-sm outline-none text-black" />
             <button className="px-3 py-2 rounded-r-lg text-sm font-semibold" style={{ backgroundColor: COLORS.accent }}>Join</button>
@@ -35,7 +35,7 @@ export default function Footer({ categories }) {
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 py-5 flex flex-col md:flex-row justify-between items-center gap-3 text-xs text-white/50">
           <span>© {new Date().getFullYear()} Bagstuff. All rights reserved.</span>
-          <span>COD • JazzCash • EasyPaisa • Visa/Mastercard</span>
+          <span>COD • JazzCash • EasyPaisa • Bank Account</span>
         </div>
       </div>
     </footer>
