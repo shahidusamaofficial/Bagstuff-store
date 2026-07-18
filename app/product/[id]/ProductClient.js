@@ -158,6 +158,8 @@ export default function ProductClient({ product, related }) {
                 <button
                   key={g.variant}
                   onClick={() => setVariant(g.variant)}
+                  aria-label={`View ${g.variant} color`}
+                  aria-pressed={variant === g.variant}
                   className="h-16 w-16 rounded-lg overflow-hidden border-2 shrink-0"
                   style={{ borderColor: variant === g.variant ? COLORS.accent : COLORS.line }}
                 >
@@ -204,7 +206,7 @@ export default function ProductClient({ product, related }) {
               </div>
               <div className="flex gap-2">
                 {product.variants.map((v) => (
-                  <button key={v} onClick={() => setVariant(v)} className="text-xs px-3 py-1.5 rounded-full border transition-colors" style={{ borderColor: v === variant ? COLORS.accent : COLORS.line, color: v === variant ? COLORS.accent : COLORS.ink, backgroundColor: v === variant ? `${COLORS.accent}0f` : "transparent" }}>
+                  <button key={v} onClick={() => setVariant(v)} aria-pressed={v === variant} className="text-xs px-3 py-1.5 rounded-full border transition-colors" style={{ borderColor: v === variant ? COLORS.accent : COLORS.line, color: v === variant ? COLORS.accent : COLORS.ink, backgroundColor: v === variant ? `${COLORS.accent}0f` : "transparent" }}>
                     {v}
                   </button>
                 ))}
@@ -214,9 +216,9 @@ export default function ProductClient({ product, related }) {
 
           <div className="flex items-center gap-3 mt-6">
             <div className="flex items-center border rounded-full" style={{ borderColor: COLORS.line }}>
-              <button onClick={() => setQty(Math.max(1, qty - 1))} className="p-2.5"><Minus size={14} /></button>
-              <span className="font-mono text-sm w-6 text-center">{qty}</span>
-              <button onClick={() => setQty(qty + 1)} className="p-2.5"><Plus size={14} /></button>
+              <button onClick={() => setQty(Math.max(1, qty - 1))} aria-label="Decrease quantity" className="p-2.5"><Minus size={14} /></button>
+              <span className="font-mono text-sm w-6 text-center" aria-live="polite">{qty}</span>
+              <button onClick={() => setQty(qty + 1)} aria-label="Increase quantity" className="p-2.5"><Plus size={14} /></button>
             </div>
             <button
               disabled={!product.in_stock}
@@ -226,7 +228,7 @@ export default function ProductClient({ product, related }) {
             >
               {added ? <><Check size={16} /> Added to cart</> : product.in_stock ? "Add to cart" : "Out of stock"}
             </button>
-            <button className="p-3 rounded-full border shrink-0" style={{ borderColor: COLORS.line }}><Heart size={16} color={COLORS.ink} /></button>
+            <button aria-label="Add to wishlist" className="p-3 rounded-full border shrink-0" style={{ borderColor: COLORS.line }}><Heart size={16} color={COLORS.ink} /></button>
           </div>
 
           <a href="https://wa.me/923000000000" target="_blank" rel="noopener noreferrer" className="mt-3 w-full flex items-center justify-center gap-2 text-sm font-medium py-3 rounded-full border" style={{ borderColor: COLORS.green, color: COLORS.green }}>
@@ -243,7 +245,7 @@ export default function ProductClient({ product, related }) {
           <div className="mt-8 border-t pt-5" style={{ borderColor: COLORS.line }}>
             <div className="flex gap-5 border-b mb-4" style={{ borderColor: COLORS.line }}>
               {Object.keys(tabs).map((t) => (
-                <button key={t} onClick={() => setTab(t)} className="text-sm capitalize pb-3 -mb-px border-b-2" style={{ borderColor: tab === t ? COLORS.accent : "transparent", color: tab === t ? COLORS.ink : COLORS.muted, fontWeight: tab === t ? 600 : 400 }}>
+                <button key={t} onClick={() => setTab(t)} aria-pressed={tab === t} className="text-sm capitalize pb-3 -mb-px border-b-2" style={{ borderColor: tab === t ? COLORS.accent : "transparent", color: tab === t ? COLORS.ink : COLORS.muted, fontWeight: tab === t ? 600 : 400 }}>
                   {t}
                 </button>
               ))}

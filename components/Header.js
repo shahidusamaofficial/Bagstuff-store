@@ -19,6 +19,10 @@ export default function Header({ categories, onOpenCart }) {
     if (query.trim()) router.push(`/shop?q=${encodeURIComponent(query.trim())}`);
   };
 
+  const closeMenuOnEscape = (e) => {
+    if (e.key === "Escape") setMenuOpen(false);
+  };
+
   return (
     <>
       <div className="w-full py-2 px-4 text-center text-xs tracking-wide" style={{ backgroundColor: COLORS.deep, color: "#fff" }}>
@@ -26,7 +30,12 @@ export default function Header({ categories, onOpenCart }) {
       </div>
       <header className="sticky top-0 z-40 w-full border-b bg-white/95 backdrop-blur" style={{ borderColor: COLORS.line }}>
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-4">
-          <button className="md:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
+          <button
+            className="md:hidden p-2.5 -ml-2.5 rounded-full hover:bg-gray-50"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+          >
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
           <Link href="/" className="flex items-center shrink-0">
@@ -34,8 +43,20 @@ export default function Header({ categories, onOpenCart }) {
           </Link>
 
           <div className="hidden md:flex items-center gap-6 ml-2">
-            <div className="relative" onMouseEnter={() => setMenuOpen(true)} onMouseLeave={() => setMenuOpen(false)}>
-              <button className="text-sm font-medium flex items-center gap-1 py-2" style={{ color: COLORS.ink }}>
+            <div
+              className="relative"
+              onMouseEnter={() => setMenuOpen(true)}
+              onMouseLeave={() => setMenuOpen(false)}
+              onFocus={() => setMenuOpen(true)}
+              onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) setMenuOpen(false); }}
+              onKeyDown={closeMenuOnEscape}
+            >
+              <button
+                className="text-sm font-medium flex items-center gap-1 py-2"
+                style={{ color: COLORS.ink }}
+                aria-haspopup="true"
+                aria-expanded={menuOpen}
+              >
                 Shop <ChevronDown size={14} />
               </button>
               {menuOpen && (
@@ -66,13 +87,20 @@ export default function Header({ categories, onOpenCart }) {
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && doSearch()}
                 placeholder="Search products…"
+                aria-label="Search products"
+                type="search"
                 className="w-full pl-9 pr-3 py-2 rounded-full border text-sm outline-none focus:ring-2"
                 style={{ borderColor: COLORS.line, backgroundColor: COLORS.paper }}
               />
             </div>
           </div>
 
-          <button id="header-cart-icon" onClick={onOpenCart} className="relative shrink-0 p-2 rounded-full hover:bg-gray-50 transition-colors">
+          <button
+            id="header-cart-icon"
+            onClick={onOpenCart}
+            className="relative shrink-0 p-2.5 rounded-full hover:bg-gray-50 transition-colors"
+            aria-label={cartCount > 0 ? `Open cart, ${cartCount} item${cartCount === 1 ? "" : "s"}` : "Open cart"}
+          >
             <ShoppingCart size={22} color={COLORS.ink} />
             {cartCount > 0 && (
               <span key={cartCount} className="fade-in-up absolute -top-0.5 -right-0.5 min-w-[18px] px-1 rounded-full text-[10px] font-bold flex items-center justify-center text-white" style={{ backgroundColor: COLORS.accent, height: 18 }}>

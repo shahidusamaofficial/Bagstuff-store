@@ -12,7 +12,7 @@ export default function SiteChrome({ categories, children }) {
   return (
     <div className="min-h-screen">
       <Header categories={categories} onOpenCart={() => setCartOpen(true)} />
-      {children}
+      <main id="main-content">{children}</main>
       <Footer categories={categories} />
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
 
@@ -21,6 +21,7 @@ export default function SiteChrome({ categories, children }) {
         href="https://wa.me/923016337624"
         target="_blank"
         rel="noopener noreferrer"
+        aria-label="Chat with us on WhatsApp"
         className="fixed bottom-5 right-5 z-40 h-14 w-14 rounded-full flex items-center justify-center shadow-xl"
         style={{ backgroundColor: COLORS.green }}
       >

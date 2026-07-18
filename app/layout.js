@@ -14,6 +14,7 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body style={{ backgroundColor: "#F7F5F1" }}>
+        <a href="#main-content" className="skip-link">Skip to content</a>
         <CartProvider>
           <SiteChrome categories={categories || []}>{children}</SiteChrome>
         </CartProvider>

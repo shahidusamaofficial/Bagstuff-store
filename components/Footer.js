@@ -27,8 +27,9 @@ export default function Footer({ categories }) {
           <div className="font-semibold text-sm mb-3 text-white/90">Stay updated</div>
           <p className="text-sm text-white/60 mb-3">Email us to get 10% off your first order.</p>
           <div className="flex">
-            <input placeholder="Email address" className="flex-1 px-3 py-2 rounded-l-lg text-sm outline-none text-black" />
-            <button className="px-3 py-2 rounded-r-lg text-sm font-semibold" style={{ backgroundColor: COLORS.accent }}>Join</button>
+            <label htmlFor="newsletter-email" className="sr-only">Email address</label>
+            <input id="newsletter-email" type="email" placeholder="Email address" className="flex-1 px-3 py-2.5 rounded-l-lg text-sm outline-none text-black" />
+            <button type="submit" className="px-4 py-2.5 rounded-r-lg text-sm font-semibold text-white" style={{ backgroundColor: COLORS.accent }}>Join</button>
           </div>
         </div>
       </div>

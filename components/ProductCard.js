@@ -18,12 +18,14 @@ export default function ProductCard({ product }) {
 
   return (
     <>
-      <Link
-        href={`/product/${product.id}`}
-        className="text-left group flex flex-col rounded-xl overflow-hidden bg-white border transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl"
+      <div
+        className="relative group flex flex-col rounded-xl overflow-hidden bg-white border transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl focus-within:-translate-y-1.5 focus-within:shadow-xl"
         style={{ borderColor: COLORS.line, boxShadow: "0 1px 2px rgba(27,31,35,0.04)" }}
       >
-        <div className="relative h-40 w-full overflow-hidden">
+        {/* Full-card link for navigation — sits under the Quick View button (z-0) so both stay independently clickable/keyboard-reachable without nesting interactive elements */}
+        <Link href={`/product/${product.id}`} className="absolute inset-0 z-0" aria-label={product.name} />
+
+        <div className="relative h-40 w-full overflow-hidden pointer-events-none">
           {product.image_url ? (
             <img src={product.image_url} alt={product.name} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
           ) : (
@@ -48,16 +50,18 @@ export default function ProductCard({ product }) {
             {product.sku}
           </span>
 
-          {/* Quick View button, revealed on hover */}
+          {/* Quick View: visible by default on touch/small screens (no hover there); reveals on hover OR keyboard focus on larger screens. z-10 keeps it above the full-card Link (z-0) so it stays independently clickable. */}
           <button
             onClick={(e) => { e.preventDefault(); e.stopPropagation(); setQuickViewOpen(true); }}
-            className="absolute inset-x-2 bottom-2 translate-y-10 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center gap-1.5 text-xs font-semibold py-2 rounded-full bg-white/95 backdrop-blur-sm shadow-md"
+            aria-label={`Quick view ${product.name}`}
+            className="pointer-events-auto absolute inset-x-2 bottom-2 z-10 md:opacity-0 md:translate-y-2 md:group-hover:opacity-100 md:group-hover:translate-y-0 md:group-focus-within:opacity-100 md:group-focus-within:translate-y-0 transition-all duration-300 flex items-center justify-center gap-1.5 text-xs font-semibold py-2.5 min-h-[44px] rounded-full bg-white/95 backdrop-blur-sm shadow-md"
             style={{ color: COLORS.ink }}
           >
             <Eye size={13} /> Quick View
           </button>
         </div>
-        <div className="p-3 flex flex-col gap-1.5 flex-1">
+
+        <div className="p-3 flex flex-col gap-1.5 flex-1 pointer-events-none">
           <div className="flex items-center gap-1.5">
             <span className="h-1.5 w-1.5 rounded-full shrink-0" style={{ backgroundColor: catColor }} />
             <span className="text-[11px] uppercase tracking-wide" style={{ color: COLORS.muted }}>{cat?.name}</span>
@@ -77,7 +81,7 @@ export default function ProductCard({ product }) {
             )}
           </div>
         </div>
-      </Link>
+      </div>
       {quickViewOpen && <QuickView product={product} onClose={() => setQuickViewOpen(false)} />}
     </>
   );

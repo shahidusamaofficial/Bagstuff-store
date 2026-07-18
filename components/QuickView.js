@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { X, Minus, Plus, Check } from "lucide-react";
 import { COLORS, formatPKR } from "@/lib/tokens";
@@ -17,6 +17,12 @@ export default function QuickView({ product, onClose }) {
   const [variant, setVariant] = useState(product.variants?.[0] || null);
   const [added, setAdded] = useState(false);
 
+  useEffect(() => {
+    const onKeyDown = (e) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [onClose]);
+
   const activeImage = (variant && product.images?.[variant]) || product.image_url;
 
   const handleAdd = (e) => {
@@ -29,12 +35,15 @@ export default function QuickView({ product, onClose }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
-      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" aria-hidden="true" />
       <div
+        role="dialog"
+        aria-modal="true"
+        aria-label={`Quick view: ${product.name}`}
         className="quickview-panel relative bg-white rounded-2xl max-w-2xl w-full grid sm:grid-cols-2 gap-6 p-5 shadow-2xl page-transition max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        <button onClick={onClose} className="absolute top-3 right-3 p-1.5 rounded-full hover:bg-gray-100 z-10">
+        <button onClick={onClose} aria-label="Close quick view" className="absolute top-3 right-3 p-2.5 rounded-full hover:bg-gray-100 z-10">
           <X size={18} />
         </button>
 
@@ -65,7 +74,7 @@ export default function QuickView({ product, onClose }) {
           {product.variants?.length > 0 && (
             <div className="flex gap-2 flex-wrap mt-4">
               {product.variants.map((v) => (
-                <button key={v} onClick={() => setVariant(v)} className="text-xs px-3 py-1.5 rounded-full border" style={{ borderColor: v === variant ? COLORS.accent : COLORS.line, color: v === variant ? COLORS.accent : COLORS.ink, backgroundColor: v === variant ? `${COLORS.accent}0f` : "transparent" }}>
+                <button key={v} onClick={() => setVariant(v)} aria-pressed={v === variant} className="text-xs px-3 py-1.5 rounded-full border" style={{ borderColor: v === variant ? COLORS.accent : COLORS.line, color: v === variant ? COLORS.accent : COLORS.ink, backgroundColor: v === variant ? `${COLORS.accent}0f` : "transparent" }}>
                   {v}
                 </button>
               ))}
@@ -74,9 +83,9 @@ export default function QuickView({ product, onClose }) {
 
           <div className="flex items-center gap-3 mt-5">
             <div className="flex items-center border rounded-full" style={{ borderColor: COLORS.line }}>
-              <button onClick={() => setQty(Math.max(1, qty - 1))} className="p-2.5"><Minus size={14} /></button>
-              <span className="font-mono text-sm w-6 text-center">{qty}</span>
-              <button onClick={() => setQty(qty + 1)} className="p-2.5"><Plus size={14} /></button>
+              <button onClick={() => setQty(Math.max(1, qty - 1))} aria-label="Decrease quantity" className="p-2.5"><Minus size={14} /></button>
+              <span className="font-mono text-sm w-6 text-center" aria-live="polite">{qty}</span>
+              <button onClick={() => setQty(qty + 1)} aria-label="Increase quantity" className="p-2.5"><Plus size={14} /></button>
             </div>
             <button
               disabled={!product.in_stock}

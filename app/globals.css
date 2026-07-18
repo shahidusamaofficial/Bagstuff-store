@@ -161,6 +161,35 @@ h1, h2, h3, .font-display {
   }
 }
 
+/* ---------- Accessible focus states ---------- */
+/* Keyboard-navigation focus ring, kept off for mouse/touch clicks via :focus-visible */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #A15864;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100%;
+  z-index: 100;
+  background: #2B1F24;
+  color: #fff;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
 /* ---------- Custom scrollbar ---------- */
 ::-webkit-scrollbar {
   width: 10px;

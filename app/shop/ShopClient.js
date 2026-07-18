@@ -84,14 +84,14 @@ export default function ShopClient({ categories, products, initialCategory, init
           </div>
           <div>
             <div className="font-semibold text-sm mb-3" style={{ color: COLORS.ink }}>Max price</div>
-            <input type="range" min="500" max="15000" step="250" value={maxPrice} onChange={(e) => setMaxPrice(Number(e.target.value))} className="w-full accent-orange-500" />
+            <input type="range" min="500" max="15000" step="250" value={maxPrice} onChange={(e) => setMaxPrice(Number(e.target.value))} aria-label="Maximum price" className="w-full" style={{ accentColor: COLORS.accent }} />
             <div className="font-mono text-xs mt-1" style={{ color: COLORS.muted }}>Up to {formatPKR(maxPrice)}</div>
           </div>
           <div>
             <div className="font-semibold text-sm mb-3" style={{ color: COLORS.ink }}>Minimum rating</div>
             <div className="flex flex-col gap-1.5">
               {[0, 4, 4.5].map((r) => (
-                <button key={r} onClick={() => setMinRating(r)} className="text-sm text-left" style={{ color: minRating === r ? COLORS.ink : COLORS.muted, fontWeight: minRating === r ? 600 : 400 }}>
+                <button key={r} onClick={() => setMinRating(r)} aria-pressed={minRating === r} className="text-sm text-left py-1" style={{ color: minRating === r ? COLORS.ink : COLORS.muted, fontWeight: minRating === r ? 600 : 400 }}>
                   {r === 0 ? "Any rating" : `${r}+ stars`}
                 </button>
               ))}
