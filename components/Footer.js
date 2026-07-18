@@ -35,7 +35,7 @@ export default function Footer({ categories }) {
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 py-5 flex flex-col md:flex-row justify-between items-center gap-3 text-xs text-white/50">
           <span>© {new Date().getFullYear()} Bagstuff. All rights reserved.</span>
-          <span>COD • JazzCash • EasyPaisa • Bank Account</span>
+          <span>COD • JazzCash • EasyPaisa • Visa/Mastercard</span>
         </div>
       </div>
     </footer>
