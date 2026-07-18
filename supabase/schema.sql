@@ -7,7 +7,9 @@ create table categories (
   id text primary key,
   name text not null,
   color text not null,
-  icon text not null
+  icon text not null,
+  image_url text,
+  featured boolean default false
 );
 
 create table products (
@@ -21,11 +23,28 @@ create table products (
   reviews integer default 0,
   badge text,
   in_stock boolean default true,
+  stock_count integer,
   variants text[],
   description text,
+  specifications text,
+  shipping_info text,
   image_url text,
+  images jsonb default '{}'::jsonb,
   created_at timestamptz default now()
 );
+
+create table reviews (
+  id bigint generated always as identity primary key,
+  product_id bigint references products(id) on delete cascade,
+  name text not null,
+  rating integer not null check (rating >= 1 and rating <= 5),
+  comment text not null,
+  approved boolean default false,
+  created_at timestamptz default now()
+);
+-- If Row Level Security is enabled on this table, also run:
+--   create policy "public can insert reviews" on reviews for insert with check (true);
+--   create policy "public can read approved reviews" on reviews for select using (approved = true);
 
 create table orders (
   id bigint generated always as identity primary key,

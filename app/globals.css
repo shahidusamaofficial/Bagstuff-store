@@ -101,6 +101,43 @@ h1, h2, h3, .font-display {
   width: 100%;
 }
 
+@keyframes glossSweep {
+  0% { transform: translateX(-130%) skewX(-20deg); }
+  55% { transform: translateX(160%) skewX(-20deg); }
+  100% { transform: translateX(160%) skewX(-20deg); }
+}
+.glass-panel {
+  position: relative;
+  isolation: isolate;
+}
+.glass-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 55%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.55), transparent);
+  animation: glossSweep 7s ease-in-out infinite;
+  pointer-events: none;
+}
+.glass-panel::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  z-index: -1;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.9), transparent);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-panel::before {
+    animation: none !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-float, .animate-blob, .animate-shimmer, .fade-in-up, .shine-btn::after {
     animation: none !important;
@@ -110,4 +147,54 @@ h1, h2, h3, .font-display {
     transform: none;
     transition: none;
   }
+}
+
+/* ---------- Custom scrollbar ---------- */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #FBF3EF;
+}
+::-webkit-scrollbar-thumb {
+  background: #C99CA4;
+  border-radius: 10px;
+  border: 2px solid #FBF3EF;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #B76E79;
+}
+html {
+  scrollbar-color: #C99CA4 #FBF3EF;
+  scrollbar-width: thin;
+}
+
+/* ---------- Skeleton shimmer for loading states ---------- */
+@keyframes skeletonPulse {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, #EDE0DA 25%, #F6ECE7 37%, #EDE0DA 63%);
+  background-size: 400% 100%;
+  animation: skeletonPulse 1.6s ease-in-out infinite;
+}
+
+/* ---------- Page transition ---------- */
+@keyframes pageFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.page-transition {
+  animation: pageFadeIn 0.35s ease both;
+}
+
+/* ---------- Flying add-to-cart ghost ---------- */
+.fly-to-cart {
+  position: fixed;
+  z-index: 100;
+  border-radius: 10px;
+  pointer-events: none;
+  transition: all 0.7s cubic-bezier(0.55, 0, 0.1, 1);
 }

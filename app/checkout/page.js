@@ -78,7 +78,8 @@ export default function CheckoutPage() {
               </label>
               {paymentMethod === "payfast" && (
                 <p className="text-xs" style={{ color: COLORS.muted }}>
-Thank you for placing an order with us, We'll reach out to you on Whatsapp for payment via Jazzcash/ Easypaisa/ Bank Account.                </p>
+                  Online payment isn't connected yet — this order will be recorded and marked pending until you confirm payment manually. See the Phase 2 setup guide to enable automatic card/wallet payments.
+                </p>
               )}
             </div>
           </div>

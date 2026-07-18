@@ -52,8 +52,8 @@ export default function Header({ categories, onOpenCart }) {
                   className="glass-panel absolute top-full left-0 border rounded-xl shadow-2xl p-3 grid grid-cols-2 gap-1 w-[420px] overflow-hidden"
                   style={{
                     background: "linear-gradient(180deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.65) 100%)",
-                    backdropFilter: "blur(34px) saturate(180%)",
-                    WebkitBackdropFilter: "blur(34px) saturate(180%)",
+                    backdropFilter: "blur(20px) saturate(180%)",
+                    WebkitBackdropFilter: "blur(20px) saturate(180%)",
                     borderColor: "rgba(255,255,255,0.6)",
                   }}
                 >
@@ -89,7 +89,7 @@ export default function Header({ categories, onOpenCart }) {
             </div>
           </div>
 
-          <button onClick={onOpenCart} className="relative shrink-0 p-2 rounded-full hover:bg-gray-50 transition-colors">
+          <button id="header-cart-icon" onClick={onOpenCart} className="relative shrink-0 p-2 rounded-full hover:bg-gray-50 transition-colors">
             <ShoppingCart size={22} color={COLORS.ink} />
             {cartCount > 0 && (
               <span key={cartCount} className="fade-in-up absolute -top-0.5 -right-0.5 min-w-[18px] px-1 rounded-full text-[10px] font-bold flex items-center justify-center text-white" style={{ backgroundColor: COLORS.accent, height: 18 }}>
