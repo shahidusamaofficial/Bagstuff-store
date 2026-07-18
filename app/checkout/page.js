@@ -74,12 +74,11 @@ export default function CheckoutPage() {
               </label>
               <label className="flex items-center gap-2 border rounded-lg px-3 py-2.5 cursor-pointer text-sm" style={{ borderColor: paymentMethod === "payfast" ? COLORS.accent : COLORS.line }}>
                 <input type="radio" checked={paymentMethod === "payfast"} onChange={() => setPaymentMethod("payfast")} />
-                Card / JazzCash / EasyPaisa
+                Bank Account / JazzCash / EasyPaisa
               </label>
               {paymentMethod === "payfast" && (
                 <p className="text-xs" style={{ color: COLORS.muted }}>
-                  Online payment isn't connected yet — this order will be recorded and marked pending until you confirm payment manually. See the Phase 2 setup guide to enable automatic card/wallet payments.
-                </p>
+We'll reach out to you on Whatsapp to collect payment via Jazzcash/ Easypaisa/ Bank Account.                </p>
               )}
             </div>
           </div>
