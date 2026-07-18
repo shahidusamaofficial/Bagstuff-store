@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Search, ShoppingCart, Menu, X, ChevronDown } from "lucide-react";
 import { COLORS } from "@/lib/tokens";
@@ -24,22 +23,13 @@ export default function Header({ categories, onOpenCart }) {
       <div className="w-full py-2 px-4 text-center text-xs tracking-wide" style={{ backgroundColor: COLORS.deep, color: "#fff" }}>
         Cash on Delivery Available Nationwide &nbsp;•&nbsp; Free shipping on orders over PKR 5,000
       </div>
-      <header
-        className="glass-panel sticky top-0 z-40 w-full border-b transition-shadow"
-        style={{
-          background: "linear-gradient(180deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.45) 100%)",
-          backdropFilter: "blur(24px) saturate(180%)",
-          WebkitBackdropFilter: "blur(24px) saturate(180%)",
-          borderColor: "rgba(255,255,255,0.6)",
-          boxShadow: "0 8px 32px rgba(43,39,36,0.10), inset 0 1px 0 rgba(255,255,255,0.8)",
-        }}
-      >
+      <header className="sticky top-0 z-40 w-full border-b bg-white/95 backdrop-blur" style={{ borderColor: COLORS.line }}>
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-4">
           <button className="md:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
-          <Link href="/" className="flex items-center shrink-0 transition-transform duration-300 hover:scale-105">
-            <Image src="/logo.png" alt="Bagstuff" width={140} height={87} priority className="h-11 w-auto" />
+          <Link href="/" className="font-extrabold text-2xl tracking-tight flex items-center gap-1.5 shrink-0" style={{ color: COLORS.ink }}>
+            <span style={{ color: COLORS.accent }}>Bag</span>stuff
           </Link>
 
           <div className="hidden md:flex items-center gap-6 ml-2">
@@ -48,19 +38,11 @@ export default function Header({ categories, onOpenCart }) {
                 Shop <ChevronDown size={14} />
               </button>
               {menuOpen && (
-                <div
-                  className="glass-panel absolute top-full left-0 border rounded-xl shadow-2xl p-3 grid grid-cols-2 gap-1 w-[420px] overflow-hidden"
-                  style={{
-                    background: "linear-gradient(180deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.65) 100%)",
-                    backdropFilter: "blur(20px) saturate(180%)",
-                    WebkitBackdropFilter: "blur(20px) saturate(180%)",
-                    borderColor: "rgba(255,255,255,0.6)",
-                  }}
-                >
+                <div className="absolute top-full left-0 bg-white border rounded-xl shadow-xl p-3 grid grid-cols-2 gap-1 w-[420px]" style={{ borderColor: COLORS.line }}>
                   {categories.map((c) => {
                     const Icon = getIcon(c.icon);
                     return (
-                      <Link key={c.id} href={`/shop?category=${c.id}`} className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white/60 transition-colors text-left">
+                      <Link key={c.id} href={`/shop?category=${c.id}`} className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-gray-50 text-left">
                         <span className="h-8 w-8 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: `${c.color}22` }}>
                           <Icon size={16} color={c.color} />
                         </span>
@@ -71,8 +53,8 @@ export default function Header({ categories, onOpenCart }) {
                 </div>
               )}
             </div>
-            <Link href="/about" className="nav-underline text-sm font-medium" style={{ color: COLORS.ink }}>About</Link>
-            <Link href="/contact" className="nav-underline text-sm font-medium" style={{ color: COLORS.ink }}>Contact</Link>
+            <Link href="/about" className="text-sm font-medium" style={{ color: COLORS.ink }}>About</Link>
+            <Link href="/contact" className="text-sm font-medium" style={{ color: COLORS.ink }}>Contact</Link>
           </div>
 
           <div className="flex-1 flex items-center max-w-md ml-auto">
@@ -83,8 +65,8 @@ export default function Header({ categories, onOpenCart }) {
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && doSearch()}
                 placeholder="Search products…"
-                className="w-full pl-9 pr-3 py-2 rounded-full border text-sm outline-none focus:ring-2 backdrop-blur-sm transition-colors"
-                style={{ borderColor: "rgba(255,255,255,0.5)", backgroundColor: "rgba(255,255,255,0.5)" }}
+                className="w-full pl-9 pr-3 py-2 rounded-full border text-sm outline-none focus:ring-2"
+                style={{ borderColor: COLORS.line, backgroundColor: COLORS.paper }}
               />
             </div>
           </div>
