@@ -23,9 +23,14 @@ export default function CartDrawer({ open, onClose }) {
           ) : cart.map((item, idx) => {
             const Icon = getIcon(item.product.categories?.icon);
             const color = item.product.categories?.color || COLORS.muted;
+            const itemImage = (item.variant && item.product.images?.[item.variant]) || item.product.image_url;
             return (
               <div key={idx} className="flex gap-3">
-                <Plate icon={Icon} color={color} iconSize={20} className="h-16 w-16 rounded-lg shrink-0" />
+                {itemImage ? (
+                  <img src={itemImage} alt={item.product.name} className="h-16 w-16 rounded-lg shrink-0 object-cover" />
+                ) : (
+                  <Plate icon={Icon} color={color} iconSize={20} className="h-16 w-16 rounded-lg shrink-0" />
+                )}
                 <div className="flex-1">
                   <div className="text-sm font-medium leading-snug" style={{ color: COLORS.ink }}>{item.product.name}</div>
                   {item.variant && <div className="text-xs" style={{ color: COLORS.muted }}>{item.variant}</div>}
