@@ -3,10 +3,10 @@ import { COLORS } from "@/lib/tokens";
 
 export default function TrustRow() {
   const items = [
-    { icon: Truck, label: "Fast Delivery", sub: "2–4 days nationwide" },
+    { icon: Truck, label: "Fast Delivery", sub: "4–5 days nationwide" },
     { icon: ShieldCheck, label: "Quality Checked", sub: "Inspected before dispatch" },
     { icon: CreditCard, label: "Secure Payments", sub: "COD, cards & wallets" },
-    { icon: Headphones, label: "Customer Care", sub: "Real replies on WhatsApp" },
+    { icon: Headphones, label: "Customer Care", sub: "Quick replies on WhatsApp" },
   ];
   return (
     <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-2 md:grid-cols-4 gap-6">
