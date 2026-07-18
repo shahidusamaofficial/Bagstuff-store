@@ -11,6 +11,8 @@ export default function CheckoutPage() {
   const [paymentMethod, setPaymentMethod] = useState("cod");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const shipping = 250;
+const total = subtotal + shipping;
 
   const update = (field) => (e) => setForm({ ...form, [field]: e.target.value });
 
@@ -120,8 +122,33 @@ We'll reach out to you on Whatsapp to collect payment via Jazzcash/ Easypaisa/ B
             );
           })}
         </div>
-        <div className="border-t pt-3 flex justify-between font-semibold text-sm" style={{ borderColor: COLORS.line, color: COLORS.ink }}>
-          <span>Subtotal</span><span className="font-mono">{formatPKR(subtotal)}</span>
+        <div className="border-t pt-3" style={{ borderColor: COLORS.line }}>
+
+  <div
+    className="flex justify-between text-sm"
+    style={{ color: COLORS.ink }}
+  >
+    <span>Subtotal</span>
+    <span className="font-mono">{formatPKR(subtotal)}</span>
+  </div>
+
+  <div
+    className="flex justify-between text-sm mt-2"
+    style={{ color: COLORS.muted }}
+  >
+    <span>Shipping</span>
+    <span className="font-mono">{formatPKR(shipping)}</span>
+  </div>
+
+  <div
+    className="border-t mt-3 pt-3 flex justify-between font-bold"
+    style={{ borderColor: COLORS.line, color: COLORS.ink }}
+  >
+    <span>Total</span>
+    <span className="font-mono">{formatPKR(total)}</span>
+  </div>
+
+</div>
         </div>
       </div>
     </div>
