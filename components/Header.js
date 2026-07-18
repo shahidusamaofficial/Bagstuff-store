@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Search, ShoppingCart, Menu, X, ChevronDown } from "lucide-react";
 import { COLORS } from "@/lib/tokens";
@@ -28,8 +29,8 @@ export default function Header({ categories, onOpenCart }) {
           <button className="md:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
-          <Link href="/" className="font-extrabold text-2xl tracking-tight flex items-center gap-1.5 shrink-0" style={{ color: COLORS.ink }}>
-            <span style={{ color: COLORS.accent }}>Bag</span>stuff
+          <Link href="/" className="flex items-center shrink-0">
+            <Image src="/logo.png" alt="Bagstuff" width={140} height={87} priority className="h-11 w-auto" />
           </Link>
 
           <div className="hidden md:flex items-center gap-6 ml-2">
