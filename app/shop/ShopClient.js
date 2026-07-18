@@ -43,7 +43,21 @@ export default function ShopClient({ categories, products, initialCategory, init
         {searchQuery && <><ChevronRight size={13} /><span style={{ color: COLORS.ink }}>Search: "{searchQuery}"</span></>}
       </div>
 
-      <div className="mt-4 mb-8 rounded-2xl overflow-hidden relative h-44 flex items-end" style={{ backgroundColor: cat ? cat.color : COLORS.deep }}>
+      <div
+        className="mt-4 mb-8 rounded-2xl overflow-hidden relative h-44 flex items-end"
+        style={{
+          backgroundColor: cat ? cat.color : COLORS.deep,
+          backgroundImage: cat?.image_url ? `url(${cat.image_url})` : undefined,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        {cat?.image_url && (
+          <div
+            className="absolute inset-0"
+            style={{ background: `linear-gradient(0deg, ${cat.color}E6 0%, ${cat.color}99 55%, ${cat.color}4D 100%)` }}
+          />
+        )}
         <div className="p-6 relative z-10">
           <div className="flex items-center gap-2 mb-1">
             {cat && <CatIcon size={22} color="#fff" />}

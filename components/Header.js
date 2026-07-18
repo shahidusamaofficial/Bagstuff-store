@@ -30,7 +30,7 @@ export default function Header({ categories, onOpenCart }) {
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
           <Link href="/" className="flex items-center shrink-0">
-            <Image src="/logo.png" alt="Bagstuff" width={140} height={87} priority className="h-11 w-auto" />
+            <Image src="/logo.png" alt="Bagstuff" width={140} height={87} priority className="h-11 w-auto animate-logo transition-transform duration-300 hover:scale-110" />
           </Link>
 
           <div className="hidden md:flex items-center gap-6 ml-2">
