@@ -18,7 +18,7 @@ export default function SiteChrome({ categories, children }) {
 
       {/* Replace the href below with your real WhatsApp Business number */}
       <a
-        href="https://wa.me/923000000000"
+        href="https://wa.me/923016337624"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-5 right-5 z-40 h-14 w-14 rounded-full flex items-center justify-center shadow-xl"
