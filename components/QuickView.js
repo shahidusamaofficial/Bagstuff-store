@@ -47,7 +47,7 @@ export default function QuickView({ product, onClose }) {
           <X size={18} />
         </button>
 
-        <div className="h-64 sm:h-full rounded-xl overflow-hidden">
+        <div className="h-64 sm:h-full rounded-xl overflow-hidden relative glint-hover">
           {activeImage ? (
             <img src={activeImage} alt={product.name} className="h-full w-full object-cover" loading="lazy" />
           ) : (
@@ -56,7 +56,10 @@ export default function QuickView({ product, onClose }) {
         </div>
 
         <div className="flex flex-col">
-          <span className="text-xs uppercase tracking-wide" style={{ color: COLORS.muted }}>{cat?.name}</span>
+          <div className="flex items-center gap-2">
+            <span className="rivet" />
+            <span className="font-mono text-[11px] uppercase tracking-[0.14em]" style={{ color: COLORS.muted }}>{cat?.name}</span>
+          </div>
           <h3 className="font-display font-bold text-xl mt-1" style={{ color: COLORS.ink }}>{product.name}</h3>
           <div className="flex items-center gap-1.5 mt-1.5">
             <Stars rating={product.rating} size={13} />

@@ -28,7 +28,7 @@ export default function CartDrawer({ open, onClose }) {
         className={`fixed top-0 right-0 h-full w-full sm:w-96 bg-white z-50 shadow-2xl transition-transform duration-300 flex flex-col ${open ? "translate-x-0" : "translate-x-full"}`}
       >
         <div className="flex items-center justify-between p-4 border-b" style={{ borderColor: COLORS.line }}>
-          <h3 className="font-bold text-xl" style={{ color: COLORS.ink }}>Your Cart</h3>
+          <h3 className="font-display font-bold text-2xl" style={{ color: COLORS.ink }}>Your Cart</h3>
           <button onClick={onClose} aria-label="Close cart" className="p-2.5 -mr-2.5 rounded-full hover:bg-gray-50"><X size={20} /></button>
         </div>
         <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-4">

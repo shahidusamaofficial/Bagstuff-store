@@ -72,7 +72,7 @@ export default function ShopClient({ categories, products, initialCategory, init
       <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-8">
         <aside className="flex flex-col gap-6">
           <div>
-            <div className="font-semibold text-sm mb-3" style={{ color: COLORS.ink }}>Category</div>
+            <div className="flex items-center gap-2 mb-3"><span className="rivet" /><span className="font-semibold text-sm" style={{ color: COLORS.ink }}>Category</span></div>
             <div className="flex flex-col gap-2">
               <Link href="/shop" className="text-sm text-left" style={{ color: !categoryId ? COLORS.accent : COLORS.muted, fontWeight: !categoryId ? 600 : 400 }}>All products</Link>
               {categories.map((c) => (
@@ -83,12 +83,12 @@ export default function ShopClient({ categories, products, initialCategory, init
             </div>
           </div>
           <div>
-            <div className="font-semibold text-sm mb-3" style={{ color: COLORS.ink }}>Max price</div>
+            <div className="flex items-center gap-2 mb-3"><span className="rivet" /><span className="font-semibold text-sm" style={{ color: COLORS.ink }}>Max price</span></div>
             <input type="range" min="500" max="15000" step="250" value={maxPrice} onChange={(e) => setMaxPrice(Number(e.target.value))} aria-label="Maximum price" className="w-full" style={{ accentColor: COLORS.accent }} />
             <div className="font-mono text-xs mt-1" style={{ color: COLORS.muted }}>Up to {formatPKR(maxPrice)}</div>
           </div>
           <div>
-            <div className="font-semibold text-sm mb-3" style={{ color: COLORS.ink }}>Minimum rating</div>
+            <div className="flex items-center gap-2 mb-3"><span className="rivet" /><span className="font-semibold text-sm" style={{ color: COLORS.ink }}>Minimum rating</span></div>
             <div className="flex flex-col gap-1.5">
               {[0, 4, 4.5].map((r) => (
                 <button key={r} onClick={() => setMinRating(r)} aria-pressed={minRating === r} className="text-sm text-left py-1" style={{ color: minRating === r ? COLORS.ink : COLORS.muted, fontWeight: minRating === r ? 600 : 400 }}>

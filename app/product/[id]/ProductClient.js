@@ -7,6 +7,7 @@ import { getIcon } from "@/lib/icons";
 import Plate from "@/components/Plate";
 import Stars from "@/components/Stars";
 import ProductCard from "@/components/ProductCard";
+import SectionHeading from "@/components/SectionHeading";
 import RecentlyViewed from "@/components/RecentlyViewed";
 import ReviewsSection from "@/components/ReviewsSection";
 import { useCart } from "@/components/CartContext";
@@ -148,6 +149,7 @@ export default function ProductClient({ product, related }) {
             ) : (
               <Plate icon={Icon} color={cat?.color} iconSize={64} className="h-full w-full" />
             )}
+            <div className="absolute inset-0 glint-hover pointer-events-none" />
             <span className="absolute top-3 right-3 p-2 rounded-full bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
               <ZoomIn size={15} color={COLORS.ink} />
             </span>
@@ -175,9 +177,9 @@ export default function ProductClient({ product, related }) {
         </div>
 
         <div>
-          <div className="flex items-center gap-1.5 mb-2">
-            <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: cat?.color }} />
-            <span className="text-xs uppercase tracking-wide" style={{ color: COLORS.muted }}>{cat?.name}</span>
+          <div className="stitch-rule mb-2 max-w-[260px]">
+            <span className="rivet" />
+            <span className="font-mono text-xs uppercase tracking-widest shrink-0" style={{ color: COLORS.muted }}>{cat?.name}</span>
           </div>
           <h1 className="font-display font-extrabold text-3xl" style={{ color: COLORS.ink }}>{product.name}</h1>
           <div className="flex items-center gap-2 mt-2">
@@ -261,7 +263,7 @@ export default function ProductClient({ product, related }) {
 
       {related.length > 0 && (
         <div className="mt-16">
-          <h2 className="font-display font-bold text-2xl mb-5" style={{ color: COLORS.ink }}>You may also like</h2>
+          <SectionHeading eyebrow="Pairs well" title="You may also like" />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {related.map((p) => <ProductCard key={p.id} product={p} />)}
           </div>

@@ -25,7 +25,8 @@ export default function Header({ categories, onOpenCart }) {
 
   return (
     <>
-      <div className="w-full py-2 px-4 text-center text-xs tracking-wide" style={{ backgroundColor: COLORS.deep, color: "#fff" }}>
+      <div className="w-full py-2 px-4 flex items-center justify-center gap-2 text-center text-xs tracking-wide font-mono" style={{ backgroundColor: COLORS.deep, color: "#fff" }}>
+        <span className="rivet hidden sm:inline-block" />
         Cash on Delivery Available Nationwide &nbsp;•&nbsp; Free shipping on orders over PKR 5,000
       </div>
       <header className="sticky top-0 z-40 w-full border-b bg-white/95 backdrop-blur" style={{ borderColor: COLORS.line }}>
@@ -52,7 +53,7 @@ export default function Header({ categories, onOpenCart }) {
               onKeyDown={closeMenuOnEscape}
             >
               <button
-                className="text-sm font-medium flex items-center gap-1 py-2"
+                className="nav-underline text-sm font-medium flex items-center gap-1 py-2"
                 style={{ color: COLORS.ink }}
                 aria-haspopup="true"
                 aria-expanded={menuOpen}
@@ -75,8 +76,8 @@ export default function Header({ categories, onOpenCart }) {
                 </div>
               )}
             </div>
-            <Link href="/about" className="text-sm font-medium" style={{ color: COLORS.ink }}>About</Link>
-            <Link href="/contact" className="text-sm font-medium" style={{ color: COLORS.ink }}>Contact</Link>
+            <Link href="/about" className="nav-underline text-sm font-medium py-2" style={{ color: COLORS.ink }}>About</Link>
+            <Link href="/contact" className="nav-underline text-sm font-medium py-2" style={{ color: COLORS.ink }}>Contact</Link>
           </div>
 
           <div className="flex-1 flex items-center max-w-md ml-auto">

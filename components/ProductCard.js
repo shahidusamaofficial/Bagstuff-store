@@ -25,12 +25,13 @@ export default function ProductCard({ product }) {
         {/* Full-card link for navigation — sits under the Quick View button (z-0) so both stay independently clickable/keyboard-reachable without nesting interactive elements */}
         <Link href={`/product/${product.id}`} className="absolute inset-0 z-0" aria-label={product.name} />
 
-        <div className="relative h-40 w-full overflow-hidden pointer-events-none">
+        <div className="relative h-40 w-full overflow-hidden pointer-events-none tag-notch" style={{ "--tag-hole-bg": "#ffffff" }}>
           {product.image_url ? (
             <img src={product.image_url} alt={product.name} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
           ) : (
             <Plate icon={Icon} color={catColor} className="h-full w-full transition-transform duration-500 group-hover:scale-110" />
           )}
+          <div className="absolute inset-0 glint-hover pointer-events-none" />
           <div className="absolute top-2 left-2 flex gap-1">
             {product.badge && (
               <span
@@ -74,10 +75,10 @@ export default function ProductCard({ product }) {
           {lowStock && (
             <span className="text-[11px] font-semibold" style={{ color: COLORS.accent }}>Only {product.stock_count} left</span>
           )}
-          <div className="mt-auto pt-1 flex items-center gap-2">
-            <span className="font-mono font-bold text-base" style={{ color: COLORS.ink }}>{formatPKR(product.price)}</span>
+          <div className="mt-auto pt-1.5 flex items-center gap-2 border-t border-dashed" style={{ borderColor: COLORS.line }}>
+            <span className="font-mono font-bold text-base pt-1.5" style={{ color: COLORS.ink }}>{formatPKR(product.price)}</span>
             {product.old_price && (
-              <span className="font-mono text-xs line-through" style={{ color: COLORS.muted }}>{formatPKR(product.old_price)}</span>
+              <span className="font-mono text-xs line-through pt-1.5" style={{ color: COLORS.muted }}>{formatPKR(product.old_price)}</span>
             )}
           </div>
         </div>

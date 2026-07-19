@@ -10,33 +10,36 @@ export default function Footer({ categories }) {
           <p className="text-sm text-white/60 leading-relaxed">Bags and jewellery for everyday and occasion wear — delivered nationwide with cash on delivery.</p>
         </div>
         <div>
-          <div className="font-semibold text-sm mb-3 text-white/90">Shop</div>
+          <div className="flex items-center gap-2 mb-3"><span className="rivet" /><span className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/70">Shop</span></div>
           <div className="flex flex-col gap-2">
             {categories.slice(0, 5).map((c) => (
-              <Link key={c.id} href={`/shop?category=${c.id}`} className="text-sm text-white/60 text-left hover:text-white">{c.name}</Link>
+              <Link key={c.id} href={`/shop?category=${c.id}`} className="text-sm text-white/60 text-left hover:text-white transition-colors">{c.name}</Link>
             ))}
           </div>
         </div>
         <div>
-          <div className="font-semibold text-sm mb-3 text-white/90">Support</div>
+          <div className="flex items-center gap-2 mb-3"><span className="rivet" /><span className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/70">Support</span></div>
           <div className="flex flex-col gap-2 text-sm text-white/60">
             <span>Track Order</span><span>Refund Policy</span><span>Shipping Policy</span><span>FAQs</span>
           </div>
         </div>
         <div>
-          <div className="font-semibold text-sm mb-3 text-white/90">Stay updated</div>
+          <div className="flex items-center gap-2 mb-3"><span className="rivet" /><span className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/70">Stay updated</span></div>
           <p className="text-sm text-white/60 mb-3">Email us to get 10% off your first order.</p>
           <div className="flex">
             <label htmlFor="newsletter-email" className="sr-only">Email address</label>
             <input id="newsletter-email" type="email" placeholder="Email address" className="flex-1 px-3 py-2.5 rounded-l-lg text-sm outline-none text-black" />
-            <button type="submit" className="px-4 py-2.5 rounded-r-lg text-sm font-semibold text-white" style={{ backgroundColor: COLORS.accent }}>Join</button>
+            <button type="submit" className="px-4 py-2.5 rounded-r-lg text-sm font-semibold text-white transition-transform hover:-translate-y-0.5" style={{ backgroundColor: COLORS.accent }}>Join</button>
           </div>
         </div>
       </div>
-      <div className="border-t border-white/10">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="stitch-rule py-1"><span className="rivet" /></div>
+      </div>
+      <div>
         <div className="max-w-7xl mx-auto px-4 py-5 flex flex-col md:flex-row justify-between items-center gap-3 text-xs text-white/50">
           <span>© {new Date().getFullYear()} Bagstuff. All rights reserved.</span>
-          <span>COD • JazzCash • EasyPaisa • Visa/Mastercard</span>
+          <span className="font-mono">COD • JazzCash • EasyPaisa • Visa/Mastercard</span>
         </div>
       </div>
     </footer>

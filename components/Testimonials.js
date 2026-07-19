@@ -1,5 +1,6 @@
 import { COLORS } from "@/lib/tokens";
 import Stars from "./Stars";
+import SectionHeading from "./SectionHeading";
 
 const TESTIMONIALS = [
   { name: "Ayesha Siddiqui", text: "The handbag looks even better in person — solid stitching, and it arrived well packaged in two days.", rating: 5 },
@@ -13,15 +14,19 @@ const TESTIMONIALS = [
 export default function Testimonials() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-14">
-      <h2 className="font-display font-bold text-3xl mb-1" style={{ color: COLORS.ink }}>What our customers are saying</h2>
-      <p className="text-sm mb-8" style={{ color: COLORS.muted }}>Real feedback from customers across Pakistan</p>
+      <SectionHeading eyebrow="From our customers" title="What people are saying" />
+      <p className="text-sm mb-8 -mt-4" style={{ color: COLORS.muted }}>Real feedback from customers across Pakistan</p>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {TESTIMONIALS.map((t, i) => (
-          <div key={i} className="p-5 rounded-xl border bg-white flex flex-col gap-3" style={{ borderColor: COLORS.line }}>
+          <div
+            key={i}
+            className="tag-notch p-5 pr-8 border bg-white flex flex-col gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+            style={{ borderColor: COLORS.line, "--tag-hole-bg": COLORS.paper }}
+          >
             <Stars rating={t.rating} />
-            <p className="text-sm leading-relaxed" style={{ color: COLORS.ink }}>"{t.text}"</p>
+            <p className="font-display text-lg italic leading-snug" style={{ color: COLORS.ink }}>&ldquo;{t.text}&rdquo;</p>
             <div className="flex items-center gap-2 mt-auto pt-1">
-              <div className="h-8 w-8 rounded-full flex items-center justify-center font-bold text-xs text-white" style={{ backgroundColor: COLORS.accent }}>
+              <div className="h-8 w-8 rounded-full flex items-center justify-center font-bold text-xs text-white shrink-0" style={{ backgroundColor: COLORS.accent }}>
                 {t.name.split(" ").map((n) => n[0]).join("")}
               </div>
               <span className="text-sm font-medium" style={{ color: COLORS.ink }}>{t.name}</span>

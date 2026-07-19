@@ -8,6 +8,7 @@ import ProductCard from "@/components/ProductCard";
 import TrustRow from "@/components/TrustRow";
 import Testimonials from "@/components/Testimonials";
 import Reveal from "@/components/Reveal";
+import SectionHeading from "@/components/SectionHeading";
 
 export const revalidate = 60; // refresh product data every minute
 
@@ -50,18 +51,36 @@ export default async function HomePage() {
         />
         <div className="relative max-w-7xl mx-auto px-4 pt-10 pb-6 grid md:grid-cols-2 gap-8 items-center">
           <div>
-            <span className="fade-in-up font-mono text-xs uppercase tracking-widest px-2 py-1 rounded inline-block" style={{ color: "#fff", backgroundColor: `${COLORS.accent}55` }}>
+            <span
+              className="fade-in-up inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] px-3 py-1.5 rounded-full border"
+              style={{ color: "#fff", borderColor: "rgba(255,255,255,0.3)", backgroundColor: "rgba(0,0,0,0.2)" }}
+            >
+              <span className="rivet" />
               {cats.length} collections · {all.length}+ pieces
             </span>
-            <h1 className="fade-in-up font-display font-extrabold text-5xl md:text-6xl leading-[0.95] mt-4 text-white" style={{ animationDelay: "0.1s" }}>
-              Bags and jewellery, made for everyday and every occasion.
+            <h1 className="fade-in-up font-display font-extrabold text-5xl md:text-6xl leading-[0.95] mt-5 text-white" style={{ animationDelay: "0.1s" }}>
+              Bags and jewellery,<br className="hidden md:block" /> made for every occasion.
             </h1>
+            {/* Hand-drawn stitch flourish — the hero's one signature mark, standing
+                in for the literal thread-run on the brand's own hangtags. */}
+            <svg
+              className="fade-in-up mt-3 w-40 h-3"
+              style={{ animationDelay: "0.15s" }}
+              viewBox="0 0 160 12"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path d="M1 6 Q 20 -2, 40 6 T 80 6 T 120 6 T 159 6" stroke={COLORS.brassLight} strokeWidth="1.5" strokeDasharray="5 4" strokeLinecap="round" />
+            </svg>
             <p className="fade-in-up text-base mt-4 max-w-md text-white/80" style={{ animationDelay: "0.2s" }}>
               Handbags, totes, crossbody bags, and jewellery — designed to last, delivered nationwide with Cash on Delivery.
             </p>
-            <div className="fade-in-up flex items-center gap-3 mt-6" style={{ animationDelay: "0.3s" }}>
-              <Link href="/shop" className="shine-btn font-semibold text-sm text-white px-6 py-3 rounded-full hover:opacity-90 transition-all hover:-translate-y-0.5" style={{ backgroundColor: COLORS.accent }}>
+            <div className="fade-in-up flex items-center gap-3 mt-7" style={{ animationDelay: "0.3s" }}>
+              <Link href="/shop" className="shine-btn font-semibold text-sm text-white px-6 py-3 rounded-full hover:opacity-90 transition-all hover:-translate-y-0.5 shadow-lg" style={{ backgroundColor: COLORS.accent }}>
                 Shop the collection
+              </Link>
+              <Link href="/about" className="font-semibold text-sm text-white/85 px-5 py-3 rounded-full border border-white/30 hover:bg-white/10 transition-all">
+                Our story
               </Link>
             </div>
           </div>
@@ -84,7 +103,7 @@ export default async function HomePage() {
 
       {/* CATEGORY GRID */}
       <div className="max-w-7xl mx-auto px-4 py-10">
-        <h2 className="font-display font-bold text-3xl mb-6" style={{ color: COLORS.ink }}>Shop by category</h2>
+        <SectionHeading eyebrow="The full range" title="Shop by category" />
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {cats.map((c, i) => {
             const Icon = getIcon(c.icon);
@@ -114,12 +133,15 @@ export default async function HomePage() {
 
       {featured.length > 0 && (
         <div className="max-w-7xl mx-auto px-4 py-10">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="font-display font-bold text-3xl" style={{ color: COLORS.ink }}>Bestsellers</h2>
-            <Link href="/shop" className="text-sm font-medium flex items-center gap-1" style={{ color: COLORS.accent }}>
-              View all <ChevronRight size={14} />
-            </Link>
-          </div>
+          <SectionHeading
+            eyebrow="Customer favourites"
+            title="Bestsellers"
+            action={
+              <Link href="/shop" className="text-sm font-medium flex items-center gap-1 shrink-0 mb-1" style={{ color: COLORS.accent }}>
+                View all <ChevronRight size={14} />
+              </Link>
+            }
+          />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {featured.map((p, i) => (
               <Reveal key={p.id} delay={i * 70}>
@@ -130,13 +152,21 @@ export default async function HomePage() {
         </div>
       )}
 
-      <div className="w-full" style={{ backgroundColor: COLORS.deep }}>
-        <div className="max-w-7xl mx-auto px-4 py-12 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="w-full relative overflow-hidden" style={{ backgroundColor: COLORS.deep }}>
+        <div
+          className="absolute -top-24 -right-24 h-64 w-64 rounded-full blur-3xl opacity-20 animate-blob pointer-events-none"
+          style={{ backgroundColor: COLORS.brass }}
+        />
+        <div className="relative max-w-7xl mx-auto px-4 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
-            <h3 className="font-display font-bold text-3xl text-white">Up to 20% off Clutches & Wallets</h3>
+            <div className="stitch-rule mb-2 max-w-[220px]">
+              <span className="rivet" />
+              <span className="font-mono text-[11px] uppercase tracking-[0.18em] shrink-0" style={{ color: COLORS.brassLight }}>Limited time</span>
+            </div>
+            <h3 className="font-display font-bold text-3xl text-white">Up to 20% off Clutches &amp; Wallets</h3>
             <p className="text-sm text-white/60 mt-1">Limited-time pricing on our evening and everyday essentials.</p>
           </div>
-          <Link href="/shop?category=clutches" className="shine-btn font-semibold text-sm px-6 py-3 rounded-full shrink-0 transition-all duration-300 hover:-translate-y-0.5" style={{ backgroundColor: COLORS.accent, color: "#fff" }}>
+          <Link href="/shop?category=clutches" className="shine-btn font-semibold text-sm px-6 py-3 rounded-full shrink-0 transition-all duration-300 hover:-translate-y-0.5 shadow-lg" style={{ backgroundColor: COLORS.accent, color: "#fff" }}>
             Shop the deal
           </Link>
         </div>
@@ -144,7 +174,7 @@ export default async function HomePage() {
 
       {arrivals.length > 0 && (
         <div className="max-w-7xl mx-auto px-4 py-10">
-          <h2 className="font-display font-bold text-3xl mb-6" style={{ color: COLORS.ink }}>New arrivals</h2>
+          <SectionHeading eyebrow="Just landed" title="New arrivals" />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {arrivals.map((p, i) => (
               <Reveal key={p.id} delay={i * 70}>

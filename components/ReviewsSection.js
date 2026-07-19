@@ -59,7 +59,7 @@ export default function ReviewsSection({ productId }) {
       ) : (
         <div className="flex flex-col gap-4 mb-5">
           {reviews.map((r) => (
-            <div key={r.id} className="pb-4 border-b" style={{ borderColor: COLORS.line }}>
+            <div key={r.id} className="pb-4 border-b border-dashed" style={{ borderColor: COLORS.line }}>
               <div className="flex items-center gap-2">
                 <div className="flex">
                   {Array.from({ length: 5 }).map((_, i) => (
@@ -99,7 +99,7 @@ export default function ReviewsSection({ productId }) {
           </div>
         </form>
       ) : (
-        <button onClick={() => setShowForm(true)} className="text-sm font-semibold px-4 py-2 rounded-full border" style={{ borderColor: COLORS.accent, color: COLORS.accent }}>
+        <button onClick={() => setShowForm(true)} className="text-sm font-semibold px-4 py-2 rounded-full border transition-all hover:-translate-y-0.5 hover:text-white" style={{ borderColor: COLORS.accent, color: COLORS.accent }} onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = COLORS.accent)} onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}>
           Write a review
         </button>
       )}

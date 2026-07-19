@@ -45,6 +45,10 @@ export default function CheckoutPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-10 grid md:grid-cols-[1fr_320px] gap-10">
       <div>
+        <div className="stitch-rule mb-2 max-w-[200px]">
+          <span className="rivet" />
+          <span className="font-mono text-[11px] uppercase tracking-[0.18em] shrink-0" style={{ color: COLORS.brass }}>Almost there</span>
+        </div>
         <h1 className="font-display font-extrabold text-3xl mb-6" style={{ color: COLORS.ink }}>Checkout</h1>
 
         <div className="flex flex-col gap-4">
@@ -85,14 +89,17 @@ We'll reach out to you on Whatsapp to collect payment via Jazzcash/ Easypaisa/ B
 
           {error && <p className="text-sm" style={{ color: "#D64545" }}>{error}</p>}
 
-          <button onClick={placeOrder} disabled={submitting} className="mt-2 font-semibold text-sm text-white py-3 rounded-full disabled:opacity-50" style={{ backgroundColor: COLORS.accent }}>
+          <button onClick={placeOrder} disabled={submitting} className="shine-btn mt-2 font-semibold text-sm text-white py-3 rounded-full disabled:opacity-50 transition-all hover:-translate-y-0.5 shadow-lg" style={{ backgroundColor: COLORS.accent }}>
             {submitting ? "Placing order…" : "Place order"}
           </button>
         </div>
       </div>
 
-      <div className="h-fit rounded-xl border p-4" style={{ borderColor: COLORS.line }}>
-        <h2 className="font-semibold text-sm mb-3" style={{ color: COLORS.ink }}>Order summary</h2>
+      <div className="tag-notch h-fit border p-4" style={{ borderColor: COLORS.line, "--tag-hole-bg": "#ffffff" }}>
+        <div className="flex items-center gap-2 mb-3">
+          <span className="rivet" />
+          <h2 className="font-mono text-[11px] uppercase tracking-[0.18em]" style={{ color: COLORS.muted }}>Order summary</h2>
+        </div>
         <div className="flex flex-col gap-3 mb-4">
           {cart.map((item, idx) => {
             const itemImage = (item.variant && item.product.images?.[item.variant]) || item.product.image_url;
@@ -120,7 +127,7 @@ We'll reach out to you on Whatsapp to collect payment via Jazzcash/ Easypaisa/ B
             );
           })}
         </div>
-        <div className="border-t pt-3 flex justify-between font-semibold text-sm" style={{ borderColor: COLORS.line, color: COLORS.ink }}>
+        <div className="border-t border-dashed pt-3 flex justify-between font-semibold text-sm" style={{ borderColor: COLORS.line, color: COLORS.ink }}>
           <span>Subtotal</span><span className="font-mono">{formatPKR(subtotal)}</span>
         </div>
       </div>
