@@ -7,7 +7,6 @@ import { Search, ShoppingCart, Menu, X, ChevronDown } from "lucide-react";
 import { COLORS } from "@/lib/tokens";
 import { getIcon } from "@/lib/icons";
 import { useCart } from "./CartContext";
-import LiquidGlass from "./LiquidGlass";
 
 export default function Header({ categories, onOpenCart }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -62,15 +61,14 @@ export default function Header({ categories, onOpenCart }) {
                 Shop <ChevronDown size={14} />
               </button>
               {menuOpen && (
-                <LiquidGlass
-                  options={{ scale: -70, chroma: 4, radius: 12 }}
+                <div
                   className="glass fade-in-up absolute top-full left-0 rounded-xl p-3 grid grid-cols-2 gap-1 w-[420px]"
                   style={{ animationDuration: "0.18s" }}
                 >
                   {categories.map((c) => {
                     const Icon = getIcon(c.icon);
                     return (
-                      <Link key={c.id} href={`/shop?category=${c.id}`} className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-gray-50 text-left">
+                      <Link key={c.id} href={`/shop?category=${c.id}`} className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white/60 text-left">
                         <span className="h-8 w-8 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: `${c.color}22` }}>
                           <Icon size={16} color={c.color} />
                         </span>
@@ -78,7 +76,7 @@ export default function Header({ categories, onOpenCart }) {
                       </Link>
                     );
                   })}
-                </LiquidGlass>
+                </div>
               )}
             </div>
             <Link href="/about" className="nav-underline text-sm font-medium py-2" style={{ color: COLORS.ink }}>About</Link>
@@ -117,14 +115,14 @@ export default function Header({ categories, onOpenCart }) {
         </div>
 
         {mobileOpen && (
-          <LiquidGlass options={{ scale: -60, chroma: 3, radius: 0 }} className="glass md:hidden px-4 py-3 flex flex-col gap-1">
+          <div className="glass md:hidden px-4 py-3 flex flex-col gap-1">
             {categories.map((c) => (
               <Link key={c.id} href={`/shop?category=${c.id}`} className="flex items-center gap-2 py-2 text-left" onClick={() => setMobileOpen(false)}>
                 <span className="h-2 w-2 rounded-full" style={{ backgroundColor: c.color }} />
                 <span className="text-sm">{c.name}</span>
               </Link>
             ))}
-          </LiquidGlass>
+          </div>
         )}
       </header>
     </>
