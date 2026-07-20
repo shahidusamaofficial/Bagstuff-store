@@ -62,13 +62,18 @@ export default function Header({ categories, onOpenCart }) {
               </button>
               {menuOpen && (
                 <div
-                  className="glass fade-in-up absolute top-full left-0 rounded-xl p-3 grid grid-cols-2 gap-1 w-[420px]"
-                  style={{ animationDuration: "0.18s" }}
+                  className="fade-in-up absolute top-full left-0 rounded-xl p-3 grid grid-cols-2 gap-1 w-[420px] border"
+                  style={{
+                    animationDuration: "0.18s",
+                    backgroundColor: "#FFFFFF",
+                    borderColor: COLORS.line,
+                    boxShadow: "0 12px 40px rgba(43,31,36,0.18)",
+                  }}
                 >
                   {categories.map((c) => {
                     const Icon = getIcon(c.icon);
                     return (
-                      <Link key={c.id} href={`/shop?category=${c.id}`} className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white/60 text-left">
+                      <Link key={c.id} href={`/shop?category=${c.id}`} className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-gray-50 text-left">
                         <span className="h-8 w-8 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: `${c.color}22` }}>
                           <Icon size={16} color={c.color} />
                         </span>
@@ -115,7 +120,7 @@ export default function Header({ categories, onOpenCart }) {
         </div>
 
         {mobileOpen && (
-          <div className="glass md:hidden px-4 py-3 flex flex-col gap-1">
+          <div className="md:hidden px-4 py-3 flex flex-col gap-1 border-t" style={{ backgroundColor: "#FFFFFF", borderColor: COLORS.line }}>
             {categories.map((c) => (
               <Link key={c.id} href={`/shop?category=${c.id}`} className="flex items-center gap-2 py-2 text-left" onClick={() => setMobileOpen(false)}>
                 <span className="h-2 w-2 rounded-full" style={{ backgroundColor: c.color }} />
