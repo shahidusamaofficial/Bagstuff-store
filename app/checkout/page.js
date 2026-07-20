@@ -49,8 +49,9 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10 grid md:grid-cols-[1fr_320px] gap-10">
-      <div>
+    <div className="relative max-w-4xl mx-auto px-4 py-10 grid md:grid-cols-[1fr_320px] gap-10 overflow-hidden">
+      <div className="absolute -top-10 right-0 h-64 w-64 rounded-full blur-3xl opacity-20 animate-blob pointer-events-none" style={{ backgroundColor: COLORS.accentDecorative }} />
+      <div className="relative">
         <div className="stitch-rule mb-2 max-w-[200px]">
           <span className="rivet" />
           <span className="font-mono text-[11px] uppercase tracking-[0.18em] shrink-0" style={{ color: COLORS.brass }}>Almost there</span>
@@ -101,7 +102,7 @@ We'll reach out to you on Whatsapp to collect payment via Jazzcash/ Easypaisa/ B
         </div>
       </div>
 
-      <div className="tag-notch h-fit border p-4" style={{ borderColor: COLORS.line, "--tag-hole-bg": "#ffffff" }}>
+      <div className="glass tag-notch h-fit p-4" style={{ "--tag-hole-bg": "rgba(255,255,255,0.75)" }}>
         <div className="flex items-center gap-2 mb-3">
           <span className="rivet" />
           <h2 className="font-mono text-[11px] uppercase tracking-[0.18em]" style={{ color: COLORS.muted }}>Order summary</h2>

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Check } from "lucide-react";
 import { COLORS } from "@/lib/tokens";
 import { supabase } from "@/lib/supabaseClient";
+import LiquidGlass from "./LiquidGlass";
 
 const initialForm = { name: "", email: "", phone: "", message: "" };
 
@@ -39,7 +40,7 @@ export default function ContactForm() {
 
   if (submitted) {
     return (
-      <div className="tag-notch border p-6 flex items-start gap-3" style={{ borderColor: COLORS.line, "--tag-hole-bg": "#ffffff" }}>
+      <LiquidGlass as="div" options={{ scale: -70, chroma: 4, radius: 16 }} className="glass tag-notch p-6 flex items-start gap-3" style={{ "--tag-hole-bg": "rgba(255,255,255,0.75)" }}>
         <span className="h-9 w-9 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: `${COLORS.green}1a` }}>
           <Check size={18} color={COLORS.green} />
         </span>
@@ -52,12 +53,12 @@ export default function ContactForm() {
             Send another message
           </button>
         </div>
-      </div>
+      </LiquidGlass>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="tag-notch border p-6 flex flex-col gap-4" style={{ borderColor: COLORS.line, "--tag-hole-bg": "#ffffff" }}>
+    <LiquidGlass as="form" onSubmit={handleSubmit} options={{ scale: -70, chroma: 4, radius: 16 }} className="glass tag-notch p-6 flex flex-col gap-4" style={{ "--tag-hole-bg": "rgba(255,255,255,0.75)" }}>
       <div className="grid sm:grid-cols-2 gap-4">
         <div>
           <label htmlFor="contact-name" className="text-sm font-medium block mb-1" style={{ color: COLORS.ink }}>Name</label>
@@ -120,6 +121,6 @@ export default function ContactForm() {
       >
         {submitting ? "Sending…" : "Send message"}
       </button>
-    </form>
+    </LiquidGlass>
   );
 }

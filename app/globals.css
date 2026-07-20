@@ -130,11 +130,25 @@ h1, h2, h3, .font-display {
    the sticky nav, dropdowns, drawers, and modals. Built as layered utility
    classes so depth (blur + saturation + inset highlight + soft shadow)
    reads as real glass rather than a flat translucent tint.
+
+   Deliberately does NOT set `position` here. An earlier version set
+   `position: relative` on .glass so a ::before highlight had a positioning
+   context — but with equal specificity, that silently beat Tailwind's own
+   `.fixed`/`.sticky`/`.absolute` utilities whenever a real-DOM component
+   applied one of those alongside `glass` (Tailwind's utilities layer is
+   emitted near the top of this file, so anything below it in the
+   cascade — including these classes — wins the tie). That broke the cart
+   drawer, the sticky header, the nav dropdown, and the product-card Quick
+   View button all the same way: they silently fell back to `position:
+   static`. Folding the rim highlight into a second `background` layer
+   below gets the same visual with zero positioning requirements, so this
+   class is now safe to combine with *any* Tailwind position utility.
    ========================================================================== */
 
 .glass {
-  position: relative;
-  background: rgba(255, 255, 255, 0.62);
+  background:
+    linear-gradient(120deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 45%),
+    rgba(255, 255, 255, 0.62);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.5);
@@ -142,38 +156,19 @@ h1, h2, h3, .font-display {
     0 8px 32px rgba(43, 31, 36, 0.14),
     inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
-/* A soft diagonal highlight along the top edge, like light catching a
-   glass rim. Requires the element to establish its own stacking context
-   (position: relative, set above) and `overflow: hidden` from its own
-   rounding/clip classes to stay contained. */
-.glass::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(120deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 45%);
-  pointer-events: none;
-}
 
 /* Dark variant — for glass sitting on photography or the espresso/ink
    sections (footer, promo banner, hero chip). */
 .glass-dark {
-  position: relative;
-  background: rgba(30, 21, 18, 0.45);
+  background:
+    linear-gradient(120deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 45%),
+    rgba(30, 21, 18, 0.45);
   backdrop-filter: blur(16px) saturate(160%);
   -webkit-backdrop-filter: blur(16px) saturate(160%);
   border: 1px solid rgba(255, 255, 255, 0.14);
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.35),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
-}
-.glass-dark::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(120deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 45%);
-  pointer-events: none;
 }
 
 /* Lighter-touch glass for small chips/badges over product photography —
