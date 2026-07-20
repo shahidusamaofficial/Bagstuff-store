@@ -55,6 +55,8 @@ create table orders (
   payment_method text not null,
   payment_status text default 'pending',
   subtotal integer not null,
+  shipping_fee integer default 0,
+  total integer,
   status text default 'received',
   created_at timestamptz default now()
 );
@@ -69,15 +71,27 @@ create table order_items (
   price integer not null
 );
 
+create table contact_messages (
+  id bigint generated always as identity primary key,
+  name text not null,
+  email text not null,
+  phone text,
+  message text not null,
+  status text default 'new',
+  created_at timestamptz default now()
+);
+
 alter table categories enable row level security;
 alter table products enable row level security;
 alter table orders enable row level security;
 alter table order_items enable row level security;
+alter table contact_messages enable row level security;
 
 create policy "Public can read categories" on categories for select using (true);
 create policy "Public can read products" on products for select using (true);
 create policy "Public can create orders" on orders for insert with check (true);
 create policy "Public can create order items" on order_items for insert with check (true);
+create policy "Public can submit contact messages" on contact_messages for insert with check (true);
 
 -- Categories
 insert into categories (id, name, color, icon) values

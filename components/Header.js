@@ -7,6 +7,7 @@ import { Search, ShoppingCart, Menu, X, ChevronDown } from "lucide-react";
 import { COLORS } from "@/lib/tokens";
 import { getIcon } from "@/lib/icons";
 import { useCart } from "./CartContext";
+import LiquidGlass from "./LiquidGlass";
 
 export default function Header({ categories, onOpenCart }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -29,7 +30,7 @@ export default function Header({ categories, onOpenCart }) {
         <span className="rivet hidden sm:inline-block" />
         Cash on Delivery Available Nationwide &nbsp;•&nbsp; Free shipping on orders over PKR 5,000
       </div>
-      <header className="sticky top-0 z-40 w-full border-b bg-white/95 backdrop-blur" style={{ borderColor: COLORS.line }}>
+      <header className="glass sticky top-0 z-40 w-full" style={{ borderColor: "rgba(255,255,255,0.5)" }}>
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-4">
           <button
             className="md:hidden p-2.5 -ml-2.5 rounded-full hover:bg-gray-50"
@@ -61,7 +62,11 @@ export default function Header({ categories, onOpenCart }) {
                 Shop <ChevronDown size={14} />
               </button>
               {menuOpen && (
-                <div className="absolute top-full left-0 bg-white border rounded-xl shadow-xl p-3 grid grid-cols-2 gap-1 w-[420px]" style={{ borderColor: COLORS.line }}>
+                <LiquidGlass
+                  options={{ scale: -70, chroma: 4, radius: 12 }}
+                  className="glass fade-in-up absolute top-full left-0 rounded-xl p-3 grid grid-cols-2 gap-1 w-[420px]"
+                  style={{ animationDuration: "0.18s" }}
+                >
                   {categories.map((c) => {
                     const Icon = getIcon(c.icon);
                     return (
@@ -73,7 +78,7 @@ export default function Header({ categories, onOpenCart }) {
                       </Link>
                     );
                   })}
-                </div>
+                </LiquidGlass>
               )}
             </div>
             <Link href="/about" className="nav-underline text-sm font-medium py-2" style={{ color: COLORS.ink }}>About</Link>
@@ -112,14 +117,14 @@ export default function Header({ categories, onOpenCart }) {
         </div>
 
         {mobileOpen && (
-          <div className="md:hidden border-t px-4 py-3 flex flex-col gap-1" style={{ borderColor: COLORS.line }}>
+          <LiquidGlass options={{ scale: -60, chroma: 3, radius: 0 }} className="glass md:hidden px-4 py-3 flex flex-col gap-1">
             {categories.map((c) => (
               <Link key={c.id} href={`/shop?category=${c.id}`} className="flex items-center gap-2 py-2 text-left" onClick={() => setMobileOpen(false)}>
                 <span className="h-2 w-2 rounded-full" style={{ backgroundColor: c.color }} />
                 <span className="text-sm">{c.name}</span>
               </Link>
             ))}
-          </div>
+          </LiquidGlass>
         )}
       </header>
     </>

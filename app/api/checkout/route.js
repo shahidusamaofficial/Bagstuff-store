@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabaseClient";
+import { calculateShipping } from "@/lib/shipping";
 
 export async function POST(req) {
   const body = await req.json();
-  const { customer, cart, paymentMethod } = body;
+  const { customer, cart, paymentMethod, shippingFee } = body;
 
   if (!customer?.name || !customer?.phone || !customer?.address || !customer?.city) {
     return NextResponse.json({ error: "Missing customer details" }, { status: 400 });
@@ -13,6 +14,11 @@ export async function POST(req) {
   }
 
   const subtotal = cart.reduce((s, i) => s + i.product.price * i.qty, 0);
+  // Trust a valid client-supplied fee (it was shown to the customer before
+  // they placed the order); otherwise compute one fresh so the order is
+  // never saved without a shipping charge.
+  const shipping_fee = Number.isFinite(shippingFee) && shippingFee >= 0 ? shippingFee : calculateShipping(subtotal).fee;
+  const total = subtotal + shipping_fee;
 
   const { data: order, error: orderError } = await supabase
     .from("orders")
@@ -23,6 +29,8 @@ export async function POST(req) {
       city: customer.city,
       payment_method: paymentMethod,
       subtotal,
+      shipping_fee,
+      total,
     })
     .select()
     .single();
@@ -53,5 +61,5 @@ export async function POST(req) {
   // marked "pending" — you'll confirm payment manually until Phase 2.
   // ---------------------------------------------------------------
 
-  return NextResponse.json({ orderId: order.id });
+  return NextResponse.json({ orderId: order.id, subtotal, shippingFee: shipping_fee, total });
 }

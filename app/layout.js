@@ -1,4 +1,5 @@
 import "./globals.css";
+import Script from "next/script";
 import { CartProvider } from "@/components/CartContext";
 import SiteChrome from "@/components/SiteChrome";
 import { supabase } from "@/lib/supabaseClient";
@@ -14,6 +15,7 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body style={{ backgroundColor: "#F7F5F1" }}>
+        <Script src="/liquid-glass.js" strategy="beforeInteractive" />
         <a href="#main-content" className="skip-link">Skip to content</a>
         <CartProvider>
           <SiteChrome categories={categories || []}>{children}</SiteChrome>

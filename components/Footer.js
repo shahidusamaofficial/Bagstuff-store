@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { COLORS } from "@/lib/tokens";
+import LiquidGlass from "./LiquidGlass";
 
 export default function Footer({ categories }) {
   return (
@@ -20,17 +21,20 @@ export default function Footer({ categories }) {
         <div>
           <div className="flex items-center gap-2 mb-3"><span className="rivet" /><span className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/70">Support</span></div>
           <div className="flex flex-col gap-2 text-sm text-white/60">
-            <span>Track Order</span><span>Refund Policy</span><span>Shipping Policy</span><span>FAQs</span>
+            <Link href="/track-order" className="text-left hover:text-white transition-colors">Track Order</Link>
+            <Link href="/refund-policy" className="text-left hover:text-white transition-colors">Refund Policy</Link>
+            <Link href="/shipping-policy" className="text-left hover:text-white transition-colors">Shipping Policy</Link>
+            <Link href="/faqs" className="text-left hover:text-white transition-colors">FAQs</Link>
           </div>
         </div>
         <div>
           <div className="flex items-center gap-2 mb-3"><span className="rivet" /><span className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/70">Stay updated</span></div>
           <p className="text-sm text-white/60 mb-3">Email us to get 10% off your first order.</p>
-          <div className="flex">
+          <LiquidGlass as="div" options={{ scale: -50, chroma: 4, radius: 999 }} className="glass-dark flex rounded-full p-1">
             <label htmlFor="newsletter-email" className="sr-only">Email address</label>
-            <input id="newsletter-email" type="email" placeholder="Email address" className="flex-1 px-3 py-2.5 rounded-l-lg text-sm outline-none text-black" />
-            <button type="submit" className="px-4 py-2.5 rounded-r-lg text-sm font-semibold text-white transition-transform hover:-translate-y-0.5" style={{ backgroundColor: COLORS.accent }}>Join</button>
-          </div>
+            <input id="newsletter-email" type="email" placeholder="Email address" className="flex-1 min-w-0 px-3 py-2 rounded-full text-sm outline-none bg-transparent text-white placeholder-white/40" />
+            <button type="submit" className="shine-btn shrink-0 px-4 py-2 rounded-full text-sm font-semibold text-white transition-transform hover:-translate-y-0.5" style={{ backgroundColor: COLORS.accent }}>Join</button>
+          </LiquidGlass>
         </div>
       </div>
       <div className="max-w-7xl mx-auto px-4">

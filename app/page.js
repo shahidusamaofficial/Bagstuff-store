@@ -9,6 +9,7 @@ import TrustRow from "@/components/TrustRow";
 import Testimonials from "@/components/Testimonials";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
+import LiquidGlass from "@/components/LiquidGlass";
 
 export const revalidate = 60; // refresh product data every minute
 
@@ -51,13 +52,14 @@ export default async function HomePage() {
         />
         <div className="relative max-w-7xl mx-auto px-4 pt-10 pb-6 grid md:grid-cols-2 gap-8 items-center">
           <div>
-            <span
-              className="fade-in-up inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] px-3 py-1.5 rounded-full border"
-              style={{ color: "#fff", borderColor: "rgba(255,255,255,0.3)", backgroundColor: "rgba(0,0,0,0.2)" }}
+            <LiquidGlass
+              as="span"
+              options={{ scale: -50, chroma: 5, radius: 999 }}
+              className="glass-dark fade-in-up inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] px-3 py-1.5 rounded-full text-white"
             >
               <span className="rivet" />
               {cats.length} collections · {all.length}+ pieces
-            </span>
+            </LiquidGlass>
             <h1 className="fade-in-up font-display font-extrabold text-5xl md:text-6xl leading-[0.95] mt-5 text-white" style={{ animationDelay: "0.1s" }}>
               Bags and jewellery,<br className="hidden md:block" /> made for every occasion.
             </h1>
@@ -159,10 +161,10 @@ export default async function HomePage() {
         />
         <div className="relative max-w-7xl mx-auto px-4 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
-            <div className="stitch-rule mb-2 max-w-[220px]">
+            <LiquidGlass as="div" options={{ scale: -50, chroma: 5 }} className="glass-dark inline-flex items-center gap-2 mb-3 px-3 py-1.5 rounded-full">
               <span className="rivet" />
               <span className="font-mono text-[11px] uppercase tracking-[0.18em] shrink-0" style={{ color: COLORS.brassLight }}>Limited time</span>
-            </div>
+            </LiquidGlass>
             <h3 className="font-display font-bold text-3xl text-white">Up to 20% off Clutches &amp; Wallets</h3>
             <p className="text-sm text-white/60 mt-1">Limited-time pricing on our evening and everyday essentials.</p>
           </div>

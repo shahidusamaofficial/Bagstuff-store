@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { COLORS, formatPKR } from "@/lib/tokens";
 import { useCart } from "@/components/CartContext";
+import { calculateShipping, FREE_SHIPPING_THRESHOLD } from "@/lib/shipping";
 
 export default function CheckoutPage() {
   const { cart, subtotal, clearCart } = useCart();
@@ -11,6 +12,11 @@ export default function CheckoutPage() {
   const [paymentMethod, setPaymentMethod] = useState("cod");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  // Locked in once per checkout session so the number shown here is the
+  // exact number charged — recalculating on every render would let the
+  // displayed estimate drift from what actually gets submitted.
+  const [shipping] = useState(() => calculateShipping(subtotal));
+  const total = subtotal + shipping.fee;
 
   const update = (field) => (e) => setForm({ ...form, [field]: e.target.value });
 
@@ -25,12 +31,12 @@ export default function CheckoutPage() {
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ customer: form, cart, paymentMethod }),
+        body: JSON.stringify({ customer: form, cart, paymentMethod, shippingFee: shipping.fee }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Something went wrong");
       clearCart();
-      router.push(`/checkout/success?order=${data.orderId}`);
+      router.push(`/checkout/success?order=${data.orderId}&subtotal=${data.subtotal}&shipping=${data.shippingFee}&total=${data.total}`);
     } catch (e) {
       setError(e.message);
     } finally {
@@ -90,7 +96,7 @@ We'll reach out to you on Whatsapp to collect payment via Jazzcash/ Easypaisa/ B
           {error && <p className="text-sm" style={{ color: "#D64545" }}>{error}</p>}
 
           <button onClick={placeOrder} disabled={submitting} className="shine-btn mt-2 font-semibold text-sm text-white py-3 rounded-full disabled:opacity-50 transition-all hover:-translate-y-0.5 shadow-lg" style={{ backgroundColor: COLORS.accent }}>
-            {submitting ? "Placing order…" : "Place order"}
+            {submitting ? "Placing order…" : `Place order · ${formatPKR(total)}`}
           </button>
         </div>
       </div>
@@ -127,9 +133,27 @@ We'll reach out to you on Whatsapp to collect payment via Jazzcash/ Easypaisa/ B
             );
           })}
         </div>
-        <div className="border-t border-dashed pt-3 flex justify-between font-semibold text-sm" style={{ borderColor: COLORS.line, color: COLORS.ink }}>
-          <span>Subtotal</span><span className="font-mono">{formatPKR(subtotal)}</span>
+        <div className="border-t border-dashed pt-3 flex flex-col gap-1.5 text-sm" style={{ borderColor: COLORS.line }}>
+          <div className="flex justify-between" style={{ color: COLORS.muted }}>
+            <span>Subtotal</span><span className="font-mono">{formatPKR(subtotal)}</span>
+          </div>
+          <div className="flex justify-between" style={{ color: COLORS.muted }}>
+            <span>Shipping</span>
+            {shipping.isFree ? (
+              <span className="font-mono font-semibold" style={{ color: COLORS.green }}>Free</span>
+            ) : (
+              <span className="font-mono">{formatPKR(shipping.fee)}</span>
+            )}
+          </div>
+          <div className="flex justify-between font-semibold pt-1.5 border-t border-dashed" style={{ borderColor: COLORS.line, color: COLORS.ink }}>
+            <span>Total</span><span className="font-mono">{formatPKR(total)}</span>
+          </div>
         </div>
+        {!shipping.isFree && (
+          <p className="text-xs mt-2" style={{ color: COLORS.muted }}>
+            Add {formatPKR(FREE_SHIPPING_THRESHOLD - subtotal)} more to unlock free shipping.
+          </p>
+        )}
       </div>
     </div>
   );

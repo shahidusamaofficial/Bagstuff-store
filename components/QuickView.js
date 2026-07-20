@@ -40,7 +40,7 @@ export default function QuickView({ product, onClose }) {
         role="dialog"
         aria-modal="true"
         aria-label={`Quick view: ${product.name}`}
-        className="quickview-panel relative bg-white rounded-2xl max-w-2xl w-full grid sm:grid-cols-2 gap-6 p-5 shadow-2xl page-transition max-h-[90vh] overflow-y-auto"
+        className="glass quickview-panel relative rounded-2xl max-w-2xl w-full grid sm:grid-cols-2 gap-6 p-5 page-transition max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <button onClick={onClose} aria-label="Close quick view" className="absolute top-3 right-3 p-2.5 rounded-full hover:bg-gray-100 z-10">

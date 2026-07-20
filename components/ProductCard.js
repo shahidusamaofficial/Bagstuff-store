@@ -5,6 +5,7 @@ import { Eye } from "lucide-react";
 import Plate from "./Plate";
 import Stars from "./Stars";
 import QuickView from "./QuickView";
+import LiquidGlass from "./LiquidGlass";
 import { COLORS, formatPKR } from "@/lib/tokens";
 import { getIcon } from "@/lib/icons";
 
@@ -35,31 +36,33 @@ export default function ProductCard({ product }) {
           <div className="absolute top-2 left-2 flex gap-1">
             {product.badge && (
               <span
-                className="text-[11px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded"
-                style={{ backgroundColor: product.badge === "Sale" ? COLORS.accent : COLORS.deep, color: "#fff" }}
+                className="glass-chip text-[11px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded-full"
+                style={{ backgroundColor: product.badge === "Sale" ? `${COLORS.accent}CC` : `${COLORS.deep}CC`, color: "#fff", border: "none" }}
               >
                 {product.badge}
               </span>
             )}
             {!product.in_stock && (
-              <span className="text-[11px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded bg-white/90" style={{ color: COLORS.muted }}>
+              <span className="glass-chip text-[11px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded-full" style={{ color: COLORS.muted }}>
                 Out of stock
               </span>
             )}
           </div>
-          <span className="absolute bottom-2 right-2 font-mono text-[10px] px-1.5 py-0.5 rounded bg-white/90" style={{ color: COLORS.muted }}>
+          <span className="glass-chip absolute bottom-2 right-2 font-mono text-[10px] px-1.5 py-0.5 rounded-full" style={{ color: COLORS.ink }}>
             {product.sku}
           </span>
 
           {/* Quick View: visible by default on touch/small screens (no hover there); reveals on hover OR keyboard focus on larger screens. z-10 keeps it above the full-card Link (z-0) so it stays independently clickable. */}
-          <button
+          <LiquidGlass
+            as="button"
+            options={{ scale: -45, chroma: 4, radius: 999 }}
             onClick={(e) => { e.preventDefault(); e.stopPropagation(); setQuickViewOpen(true); }}
             aria-label={`Quick view ${product.name}`}
-            className="pointer-events-auto absolute inset-x-2 bottom-2 z-10 md:opacity-0 md:translate-y-2 md:group-hover:opacity-100 md:group-hover:translate-y-0 md:group-focus-within:opacity-100 md:group-focus-within:translate-y-0 transition-all duration-300 flex items-center justify-center gap-1.5 text-xs font-semibold py-2.5 min-h-[44px] rounded-full bg-white/95 backdrop-blur-sm shadow-md"
+            className="glass pointer-events-auto absolute inset-x-2 bottom-2 z-10 md:opacity-0 md:translate-y-2 md:group-hover:opacity-100 md:group-hover:translate-y-0 md:group-focus-within:opacity-100 md:group-focus-within:translate-y-0 transition-all duration-300 flex items-center justify-center gap-1.5 text-xs font-semibold py-2.5 min-h-[44px] rounded-full"
             style={{ color: COLORS.ink }}
           >
             <Eye size={13} /> Quick View
-          </button>
+          </LiquidGlass>
         </div>
 
         <div className="p-3 flex flex-col gap-1.5 flex-1 pointer-events-none">

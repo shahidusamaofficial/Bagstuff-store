@@ -5,6 +5,7 @@ import { ChevronRight } from "lucide-react";
 import { COLORS, formatPKR } from "@/lib/tokens";
 import { getIcon } from "@/lib/icons";
 import ProductCard from "@/components/ProductCard";
+import LiquidGlass from "@/components/LiquidGlass";
 
 export default function ShopClient({ categories, products, initialCategory, initialQuery }) {
   const categoryId = initialCategory;
@@ -65,7 +66,7 @@ export default function ShopClient({ categories, products, initialCategory, init
               {cat ? cat.name : searchQuery ? `Results for "${searchQuery}"` : "All Products"}
             </h1>
           </div>
-          <p className="text-sm text-white/80">{filtered.length} of {base.length} products shown</p>
+          <LiquidGlass as="span" options={{ scale: -40, chroma: 4, radius: 999 }} className="glass-dark inline-block mt-1.5 px-2.5 py-1 rounded-full text-xs text-white/90">{filtered.length} of {base.length} products shown</LiquidGlass>
         </div>
       </div>
 
@@ -112,7 +113,21 @@ export default function ShopClient({ categories, products, initialCategory, init
               <option value="rating">Highest Rated</option>
             </select>
           </div>
-          {filtered.length === 0 ? (
+          {base.length === 0 ? (
+            <div className="tag-notch border bg-white py-16 px-6 text-center" style={{ borderColor: COLORS.line, "--tag-hole-bg": "#ffffff" }}>
+              <div className="font-display font-bold text-xl mb-1" style={{ color: COLORS.ink }}>
+                {cat ? `New ${cat.name.toLowerCase()} arriving soon` : "Nothing here yet"}
+              </div>
+              <p className="text-sm max-w-sm mx-auto" style={{ color: COLORS.muted }}>
+                {searchQuery
+                  ? `We couldn't find anything matching "${searchQuery}".`
+                  : "We're still stocking this category — check back soon or browse everything else in the meantime."}
+              </p>
+              <Link href="/shop" className="text-sm font-semibold mt-4 inline-block hover:underline" style={{ color: COLORS.accent }}>
+                Browse all products →
+              </Link>
+            </div>
+          ) : filtered.length === 0 ? (
             <div className="py-20 text-center text-sm" style={{ color: COLORS.muted }}>No products match these filters.</div>
           ) : (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">

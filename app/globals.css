@@ -124,6 +124,76 @@ h1, h2, h3, .font-display {
   animation-play-state: paused;
 }
 
+/* ==========================================================================
+   GLASSMORPHISM
+   Frosted-glass surfaces for anything that floats above other content:
+   the sticky nav, dropdowns, drawers, and modals. Built as layered utility
+   classes so depth (blur + saturation + inset highlight + soft shadow)
+   reads as real glass rather than a flat translucent tint.
+   ========================================================================== */
+
+.glass {
+  position: relative;
+  background: rgba(255, 255, 255, 0.62);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 8px 32px rgba(43, 31, 36, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+/* A soft diagonal highlight along the top edge, like light catching a
+   glass rim. Requires the element to establish its own stacking context
+   (position: relative, set above) and `overflow: hidden` from its own
+   rounding/clip classes to stay contained. */
+.glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 45%);
+  pointer-events: none;
+}
+
+/* Dark variant — for glass sitting on photography or the espresso/ink
+   sections (footer, promo banner, hero chip). */
+.glass-dark {
+  position: relative;
+  background: rgba(30, 21, 18, 0.45);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+.glass-dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 45%);
+  pointer-events: none;
+}
+
+/* Lighter-touch glass for small chips/badges over product photography —
+   less blur so tiny elements don't turn to mush, more transparency. */
+.glass-chip {
+  background: rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(8px) saturate(160%);
+  -webkit-backdrop-filter: blur(8px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+/* Firefox (pre-2023) / very old Safari fallback: if backdrop-filter isn't
+   supported, fall back to a solid frosted tint rather than a see-through
+   panel with no legibility floor. */
+@supports not (backdrop-filter: blur(1px)) {
+  .glass { background: rgba(255, 255, 255, 0.92); }
+  .glass-dark { background: rgba(30, 21, 18, 0.92); }
+  .glass-chip { background: rgba(255, 255, 255, 0.85); }
+}
+
 /* ---------- Ambient / continuous animations ---------- */
 
 @keyframes gentleFloat {

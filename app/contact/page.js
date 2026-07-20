@@ -1,5 +1,6 @@
 import { MessageCircle, Mail } from "lucide-react";
 import { COLORS } from "@/lib/tokens";
+import ContactForm from "@/components/ContactForm";
 
 export default function ContactPage() {
   return (
@@ -15,7 +16,7 @@ export default function ContactPage() {
         Questions about sizing, an order, or a custom request — reach us however&rsquo;s easiest. We look forward to hearing from you.
       </p>
 
-      <div className="grid sm:grid-cols-2 gap-4">
+      <div className="grid sm:grid-cols-2 gap-4 mb-10">
         <a
           href="https://wa.me/923016337624"
           target="_blank"
@@ -47,6 +48,14 @@ export default function ContactPage() {
           </div>
         </a>
       </div>
+
+      <div className="stitch-rule mb-4">
+        <span className="rivet" />
+        <span className="font-mono text-[11px] uppercase tracking-[0.18em] shrink-0" style={{ color: COLORS.brass }}>
+          Or write to us directly
+        </span>
+      </div>
+      <ContactForm />
     </div>
   );
 }

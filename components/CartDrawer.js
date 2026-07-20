@@ -19,13 +19,13 @@ export default function CartDrawer({ open, onClose }) {
 
   return (
     <>
-      {open && <div className="fixed inset-0 bg-black/40 z-50" onClick={onClose} aria-hidden="true" />}
+      {open && <div className="fixed inset-0 bg-black/30 backdrop-blur-sm z-50" onClick={onClose} aria-hidden="true" />}
       <div
         role="dialog"
         aria-modal="true"
         aria-label="Your cart"
         aria-hidden={!open}
-        className={`fixed top-0 right-0 h-full w-full sm:w-96 bg-white z-50 shadow-2xl transition-transform duration-300 flex flex-col ${open ? "translate-x-0" : "translate-x-full"}`}
+        className={`glass fixed top-0 right-0 h-full w-full sm:w-96 z-50 transition-transform duration-300 flex flex-col ${open ? "translate-x-0" : "translate-x-full"}`}
       >
         <div className="flex items-center justify-between p-4 border-b" style={{ borderColor: COLORS.line }}>
           <h3 className="font-display font-bold text-2xl" style={{ color: COLORS.ink }}>Your Cart</h3>
@@ -67,7 +67,7 @@ export default function CartDrawer({ open, onClose }) {
             <div className="flex justify-between text-sm mb-3" style={{ color: COLORS.ink }}>
               <span>Subtotal</span><span className="font-mono font-bold">{formatPKR(subtotal)}</span>
             </div>
-            <Link href="/checkout" onClick={onClose} className="w-full block text-center font-semibold text-sm text-white py-3 rounded-full" style={{ backgroundColor: COLORS.accent }}>
+            <Link href="/checkout" onClick={onClose} className="shine-btn w-full block text-center font-semibold text-sm text-white py-3 rounded-full transition-all hover:-translate-y-0.5 shadow-lg" style={{ backgroundColor: COLORS.accent }}>
               Checkout
             </Link>
           </div>

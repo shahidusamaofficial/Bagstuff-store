@@ -10,6 +10,7 @@ import ProductCard from "@/components/ProductCard";
 import SectionHeading from "@/components/SectionHeading";
 import RecentlyViewed from "@/components/RecentlyViewed";
 import ReviewsSection from "@/components/ReviewsSection";
+import LiquidGlass from "@/components/LiquidGlass";
 import { useCart } from "@/components/CartContext";
 import { trackRecentlyViewed } from "@/lib/recentlyViewed";
 import { flyToCart } from "@/lib/flyToCart";
@@ -150,7 +151,7 @@ export default function ProductClient({ product, related }) {
               <Plate icon={Icon} color={cat?.color} iconSize={64} className="h-full w-full" />
             )}
             <div className="absolute inset-0 glint-hover pointer-events-none" />
-            <span className="absolute top-3 right-3 p-2 rounded-full bg-white/80 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+            <span className="glass-chip absolute top-3 right-3 p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
               <ZoomIn size={15} color={COLORS.ink} />
             </span>
           </div>
@@ -275,7 +276,7 @@ export default function ProductClient({ product, related }) {
       {showSizeGuide && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={() => setShowSizeGuide(false)}>
           <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
-          <div className="relative bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl page-transition" onClick={(e) => e.stopPropagation()}>
+          <LiquidGlass as="div" options={{ scale: -80, chroma: 5, radius: 16 }} className="glass relative rounded-2xl max-w-md w-full p-6 page-transition" onClick={(e) => e.stopPropagation()}>
             <h3 className="font-display font-bold text-xl mb-3" style={{ color: COLORS.ink }}>Size & fit guide</h3>
             <div className="text-sm leading-relaxed flex flex-col gap-2" style={{ color: COLORS.muted }}>
               <p>Measurements are approximate and may vary slightly by ±0.5" due to handcrafting.</p>
@@ -287,10 +288,10 @@ export default function ProductClient({ product, related }) {
               </ul>
               <p>Check each product's Specifications tab for exact dimensions of this item.</p>
             </div>
-            <button onClick={() => setShowSizeGuide(false)} className="mt-5 w-full text-sm font-semibold text-white py-2.5 rounded-full" style={{ backgroundColor: COLORS.accent }}>
+            <button onClick={() => setShowSizeGuide(false)} className="shine-btn mt-5 w-full text-sm font-semibold text-white py-2.5 rounded-full transition-all hover:-translate-y-0.5 shadow-lg" style={{ backgroundColor: COLORS.accent }}>
               Got it
             </button>
-          </div>
+          </LiquidGlass>
         </div>
       )}
     </div>
